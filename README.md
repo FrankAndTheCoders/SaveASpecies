@@ -10,7 +10,6 @@ Code of Conduct
 5. Dont't take things personally, bring it up if something is bothering you
 6. Attack the problem not the person
 7. Switch partners at half day mark
-8. dont mess with Rui
 
 -Code Norms
 1. Use eslint and prettier
@@ -18,4 +17,4 @@ Code of Conduct
 3. Use material UI
 4. Use waffle.io
 5. Use travis
-6. When you make a pull request, annouce to slack
+6. When you make a pull request, announce to slack
