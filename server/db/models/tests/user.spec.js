@@ -29,4 +29,25 @@ describe('User model', () => {
       })
     }) // end describe('correctPassword')
   }) // end describe('instanceMethods')
+
+  describe('model is saved correctly', () => {
+    let guy
+
+    beforeEach(async () => {
+      guy = await User.create({
+        firstName: 'John',
+        lastName: 'Doe',
+        email: 'johndoe@example.com',
+        role: 'admin',
+        password: 'password123'
+      })
+    })
+
+    it('saves the correct values', () => {
+      expect(guy.firstName).to.equal('John')
+      expect(guy.lastName).to.equal('Doe')
+      expect(guy.email).to.equal('johndoe@example.com')
+      expect(guy.role).to.equal('admin')
+    })
+  })
 }) // end describe('User model')
