@@ -1,8 +1,8 @@
 const User = require('./user')
-const Species = require('./species')
+// const Species = require('./species')
 const Price = require('./price')
-const OrderLine = require('./orderLine')
-const Order = require('./order')
+// const OrderLine = require('./orderLine')
+// const Order = require('./order')
 
 /**
  * If we had any associations to make, this would be a great place to put them!
@@ -19,8 +19,8 @@ const Order = require('./order')
  */
 module.exports = {
   User,
-  Species,
-  Price,
-  OrderLine,
-  Order
+  // Species,
+  Price
+  // OrderLine,
+  // Order
 }
