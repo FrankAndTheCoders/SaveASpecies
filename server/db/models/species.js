@@ -9,6 +9,9 @@ const Species = db.define('species', {
       notEmpty: true
     }
   },
+  category: {
+    type: Sequilize.ENUM('Birds', 'Fish', 'Mammals')
+  },
   inventory: {
     type: Sequilize.INTEGER,
     validate: {
