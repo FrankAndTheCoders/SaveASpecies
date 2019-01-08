@@ -14,14 +14,14 @@ notifications:
 install:
   - npm ci # faster, goes only from package-lock
 before_script:
-  - psql -c 'create database "boilermaker-test";' -U postgres # remember to change this name if you change it elsewhere (e.g. package.json)
+  - psql -c 'create database "SaveASpecies-test";' -U postgres # remember to change this name if you change it elsewhere (e.g. package.json)
 
-# before_deploy:
-#   - npm run build-client # make the bundle
-#   - rm -rf node_modules # omit from the tarball, since we skip cleanup
-# deploy:
-#   skip_cleanup: true # prevents travis from deleting the build
-#   provider: heroku
-#   app: YOUR-HEROKU-APP-NAME-HERE # see README
-#   api_key:
-#     secure: YOUR-***ENCRYPTED***-API-KEY-HERE # see README
+before_deploy:
+  - npm run build-client # make the bundle
+  - rm -rf node_modules # omit from the tarball, since we skip cleanup
+deploy:
+  skip_cleanup: true # prevents travis from deleting the build
+  provider: heroku
+  app: saveaspecies # see README
+  api_key:
+    secure: GEsU03MDOm2XWESNhbI7x20fRk6/t00OgcT+LRg3piYhm6iGUcjEYEPWTQSO4XrkxTm23kMgy80wop7y4lSlagGJBJkcptVDhV8DQxG11UdJFU4cXc4qSDSCWkhCfWDMHE1WlbjsqF1kak18dKZhwzKfI9ODwfzhnDIR7vk6MKbglHQs7mP5Tfz3ZCLhJaOBOE1Dnzd5igSu/zbFhxM9IoY0lBrbvRJZHwbZvtsi70p3LU876oR78P2S0c5kqYXleJ8wrTsOlyP3VioMbxv+zqMR5z/gtdR3NL/8PoiRIonNjjITUxoD3lIVEwMrdjVMjZgKMqq/zp+5blLy/poOhboMIzZjaeZDt4lhDez/bIIZ0oZK2y0s5Mdydhl5Ndkhpdfr9xplYsiGhQbWnyCYd798H41kMGR3+5rDx/v+IqShEdrvjhVUtcqaZFxNLY5CVOFqDKoP3yZXl877CqGt/jSQOI2CMFxesMhwEvpVr/jvX8zmcQVld3VuvhMvNTZUu3piaOLM8zJ47zi0TkYtM/PKcIzMF3BFcawU3cnnjP8RiOAHKDZ0XETiNrPNpiRDwLjI7oWOdLNLMAc5NT1LRs8L47qkFdfVbKDaXhkpfHr7YVcEzd0t/rUZp4snJVKjQYRGVYtNNx+FI/acFskSxXHnk2+8Huq3j9bvl6QvFdg= # see README
