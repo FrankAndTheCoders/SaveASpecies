@@ -6,7 +6,7 @@ import history from './history'
 import store from './store'
 import App from './app'
 // delete this comment
-
+// delete this comment 2
 
 // establishes socket connection
 import './socket'
