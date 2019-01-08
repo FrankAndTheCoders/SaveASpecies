@@ -1,4 +1,4 @@
-const Sequilize = require('')
+const Sequilize = require('sequelize')
 const db = require('../db')
 
 const Species = db.define('species', {
