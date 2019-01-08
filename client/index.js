@@ -5,6 +5,8 @@ import {Router} from 'react-router-dom'
 import history from './history'
 import store from './store'
 import App from './app'
+// delete this comment
+
 
 // establishes socket connection
 import './socket'
