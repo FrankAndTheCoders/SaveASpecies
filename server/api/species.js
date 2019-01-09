@@ -11,8 +11,13 @@ router.get('/', async (req, res, next) => {
 })
 
 router.get('/:id', async (req, res, next) => {
+  const speciesId = Number(req.params.id)
   try {
-    const speciesType = await Species.findByPk(req.params.id)
+    const speciesType = await Species.findOne({
+      where: {
+        id: speciesId
+      }
+    })
     res.json(speciesType)
   } catch (err) {
     next(err)
