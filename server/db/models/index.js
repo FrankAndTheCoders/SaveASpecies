@@ -1,5 +1,5 @@
 const User = require('./user')
-// const Species = require('./species')
+const Species = require('./species')
 const Price = require('./price')
 const OrderLine = require('./orderLine')
 // const Order = require('./order')
@@ -19,8 +19,8 @@ const OrderLine = require('./orderLine')
  */
 module.exports = {
   User,
-  // Species,
-  Price,
-  OrderLine
+  Species,
+  Price
+  // OrderLine,
   // Order
 }
