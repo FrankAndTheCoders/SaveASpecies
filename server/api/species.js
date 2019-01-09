@@ -1,9 +1,15 @@
 const router = require('express').Router()
-const {Species} = require('../db/models')
+const {Species, Price} = require('../db/models')
 
 router.get('/', async (req, res, next) => {
   try {
-    const allSpecies = await Species.findAll()
+    const allSpecies = await Species.findAll({
+      include: [
+        {
+          model: Price
+        }
+      ]
+    })
     res.json(allSpecies)
   } catch (err) {
     next(err)
