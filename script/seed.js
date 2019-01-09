@@ -1,7 +1,7 @@
 'use strict'
 
 const db = require('../server/db')
-const {User, Species} = require('../server/db/models')
+const {User, Species, Price, Order, OrderLine} = require('../server/db/models')
 
 const species = [
   {
@@ -126,12 +126,90 @@ const users = [
   }
 ]
 
+const prices = [
+  {
+    currentPrice: 1750,
+    effectiveDate: new Date('2019-01-02')
+  },
+  {
+    currentPrice: 2300,
+    effectiveDate: new Date('2019-01-03')
+  },
+  {
+    currentPrice: 3000,
+    effectiveDate: new Date('2019-01-04')
+  },
+  {
+    currentPrice: 2700,
+    effectiveDate: new Date('2019-01-05')
+  },
+  {
+    currentPrice: 1600,
+    effectiveDate: new Date('2019-01-01')
+  },
+  {
+    currentPrice: 1200,
+    effectiveDate: new Date('2019-01-02')
+  },
+  {
+    currentPrice: 1000,
+    effectiveDate: new Date('2019-01-02')
+  },
+  {
+    currentPrice: 2000,
+    effectiveDate: new Date('2019-01-03')
+  },
+  {
+    currentPrice: 2350,
+    effectiveDate: new Date('2019-01-04')
+  },
+  {
+    currentPrice: 2500,
+    effectiveDate: new Date('2019-01-06')
+  },
+  {
+    currentPrice: 1300,
+    effectiveDate: new Date('2019-01-06')
+  },
+  {
+    currentPrice: 2100,
+    effectiveDate: new Date('2019-01-03')
+  }
+]
+
+// const orderLines = [
+//   {
+//     quantity: 3,
+//     subTotal: 3000,
+//     orderId: 1,
+//     speciesId: 1,
+//     priceId: 1
+//   }
+// ]
+
 async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
 
-  await Promise.all(species.map(animal => Species.create(animal)))
-  await Promise.all(users.map(user => User.create(user)))
+  const dbSpecies = await Promise.all(
+    species.map(animal => Species.create(animal))
+  )
+  const dbUsers = await Promise.all(users.map(user => User.create(user)))
+  const dbPrices = await Promise.all(prices.map(price => Price.create(price)))
+  //await Promise.all(orderLines.map(orderLine => OrderLine.create(orderLine)))
+
+  // console.log('Species Methods')
+  // console.log(Object.keys(dbSpecies[0].__proto__))
+
+  // console.log('Price Methods')
+  // console.log(Object.keys(dbPrices[0].__proto__))
+  // await dbPrices.forEach(price =>
+  //   price.setSpecies(
+  //     dbSpecies.forEach(animal => {
+  //       return animal
+  //     })
+  //   )
+  // )
 
   console.log(`seeded ${users.length} users`)
   console.log(`seeded successfully`)
