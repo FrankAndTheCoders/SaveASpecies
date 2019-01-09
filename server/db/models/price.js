@@ -7,7 +7,8 @@ const Price = db.define('price', {
     allowNull: false
   },
   effectiveDate: {
-    type: Sequelize.DATE
+    type: Sequelize.DATE,
+    allowNull: false
   }
 })
 
