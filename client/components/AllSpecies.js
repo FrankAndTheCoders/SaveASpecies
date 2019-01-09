@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {campusDeleted} from '../../../../Checkpoints/senior-enrichment/app/reducers/campus'
+import {Link, withRouter} from 'react-router-dom'
 
 const species = [
   {
@@ -113,7 +113,7 @@ class AllSpecies extends Component {
         <ul>
           {species.map(indSpecies => (
             <div key={indSpecies.id}>
-              <img src={indSpecies.imageUrl} />
+              <img src={indSpecies.ImageUrl} />
               <div>
                 <li>{indSpecies.name}</li>
               </div>
@@ -126,3 +126,5 @@ class AllSpecies extends Component {
     )
   }
 }
+
+export default AllSpecies
