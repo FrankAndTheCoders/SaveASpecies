@@ -2,7 +2,6 @@
 
 const {expect} = require('chai')
 const db = require('../../index')
-// const {OrderLine} = require('../index')
 const OrderLine = db.model('orderLine')
 
 describe('OrderLine model', () => {
@@ -11,14 +10,14 @@ describe('OrderLine model', () => {
   })
 
   describe('saving an object', async () => {
-    try {
-      let line = await OrderLine.create({quantity: 11, subTotal: 11200})
-      // console.log(line)
-    } catch (error) {
-      console.log(error)
-    }
+    const quantity = Math.floor(Math.random() * 50) + 1
+    let subTotal = Math.floor(Math.random() * 1000) + 1
+    subTotal *= 100
+    const line = await OrderLine.create({quantity, subTotal})
+
     it('returns the correct value for each field', () => {
-      expect(false).to.be.equal(true)
+      expect(line.quantity).to.be.equal(quantity)
+      expect(line.subTotal).to.be.equal(subTotal)
     })
   })
 })

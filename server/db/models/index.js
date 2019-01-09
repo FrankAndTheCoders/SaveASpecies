@@ -20,7 +20,7 @@ const OrderLine = require('./orderLine')
 module.exports = {
   User,
   Species,
-  Price
-  // OrderLine,
+  Price,
+  OrderLine
   // Order
 }
