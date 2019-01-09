@@ -1,7 +1,7 @@
 const User = require('./user')
 const Species = require('./species')
 const Price = require('./price')
-// const OrderLine = require('./orderLine')
+const OrderLine = require('./orderLine')
 // const Order = require('./order')
 
 /**
@@ -20,7 +20,7 @@ const Price = require('./price')
 module.exports = {
   User,
   Species,
-  Price
-  // OrderLine,
+  Price,
+  OrderLine
   // Order
 }
