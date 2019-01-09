@@ -177,15 +177,15 @@ const prices = [
   }
 ]
 
-// const orderLines = [
-//   {
-//     quantity: 3,
-//     subTotal: 3000,
-//     orderId: 1,
-//     speciesId: 1,
-//     priceId: 1
-//   }
-// ]
+const today = new Date()
+const weekAgo = new Date().setDate(today.getDate() - 7)
+const monthAgo = new Date().setDate(today.getDate() - 30)
+
+const orders = [
+  {totalAmount: 2500000},
+  {purchaseDate: weekAgo, totalAmount: 3800000, isPurchased: true},
+  {purchaseDate: monthAgo, totalAmount: 5750000, isPurchased: true}
+]
 
 async function seed() {
   await db.sync({force: true})
@@ -196,20 +196,22 @@ async function seed() {
   )
   const dbUsers = await Promise.all(users.map(user => User.create(user)))
   const dbPrices = await Promise.all(prices.map(price => Price.create(price)))
-  //await Promise.all(orderLines.map(orderLine => OrderLine.create(orderLine)))
+  const dbOrders = await Promise.all(orders.map(order => Order.create(order)))
 
-  // console.log('Species Methods')
-  // console.log(Object.keys(dbSpecies[0].__proto__))
+  const orderLines = []
+  for (let i = 0; i < dbSpecies.length; i++) {
+    await dbPrices[i].setSpecies(dbSpecies[i])
+    const orderLine = await dbPrices[i].createOrderLine({quantity: i + 1})
+    orderLines.push(orderLine)
+    await dbSpecies[i].setOrderLines([orderLine])
+  }
 
-  // console.log('Price Methods')
-  // console.log(Object.keys(dbPrices[0].__proto__))
-  // await dbPrices.forEach(price =>
-  //   price.setSpecies(
-  //     dbSpecies.forEach(animal => {
-  //       return animal
-  //     })
-  //   )
-  // )
+  let index = 8
+  let length = 4
+  for (let i = 0; i < dbOrders.length; i++) {
+    await dbOrders[i].setOrderLines(orderLines.slice(index, index + length))
+    index -= 4
+  }
 
   console.log(`seeded ${users.length} users`)
   console.log(`seeded successfully`)
