@@ -1,3 +1,4 @@
+/* eslint-disable max-statements */
 'use strict'
 
 const db = require('../server/db')
@@ -14,7 +15,6 @@ const {
   sixMonthsAgoPrices,
   quarterAgoPrices
 } = require('./prices')
-// const allPrices = [...currentPrices, ...pastPrices, ...futurPrices]
 const orders = require('./orders')
 const orderLines = require('./orderLines')
 
@@ -24,9 +24,6 @@ async function seed() {
 
   const dbSpecies = await Promise.all(species.map(anml => Species.create(anml)))
   const dbUsers = await Promise.all(users.map(user => User.create(user)))
-  // const dbPrices = await Promise.all(
-  //   allPrices.map(price => Price.create(price))
-  // )
   const dbCurrentPrices = await Promise.all(
     currentPrices.map(price => Price.create(price))
   )
@@ -44,10 +41,7 @@ async function seed() {
   )
   const dbOrders = await Promise.all(orders.map(order => Order.create(order)))
 
-  // console.log(Object.keys(Object.getPrototypeOf(dbCurrentPrices[0])))
-
-  // await OrderLine.create({quantity: 2, subTotal: 1})
-
+  //  Set prices on species (current, future, historical)
   for (let i = 0; i < dbCurrentPrices.length; i++) {
     await dbCurrentPrices[i].setSpecies(dbSpecies[i])
     await dbFuturePrices[i].setSpecies(dbSpecies[i])
@@ -56,101 +50,47 @@ async function seed() {
     await db6MonthPrices[i].setSpecies(dbSpecies[i])
   }
 
-  /*
-Species
-=========================
-[ '_customGetters',
-  '_customSetters',
-  'validators',
-  '_hasCustomGetters',
-  '_hasCustomSetters',
-  'rawAttributes',
-  'attributes',
-  '_isAttribute',
-  'getOrderLines',
-  'countOrderLines',
-  'hasOrderLine',
-  'hasOrderLines',
-  'setOrderLines',
-  'addOrderLine',
-  'addOrderLines',
-  'removeOrderLine',
-  'removeOrderLines',
-  'createOrderLine' ]
+  //  ORDER #1
+  const ord1Line1 = await dbOrders[0].createOrderLine({quantity: 3})
+  const ord1Line2 = await dbOrders[0].createOrderLine({quantity: 2})
 
-Orders
-========================
-[ '_customGetters',
-  '_customSetters',
-  'validators',
-  '_hasCustomGetters',
-  '_hasCustomSetters',
-  'rawAttributes',
-  'attributes',
-  '_isAttribute',
-  'getOrderLines',
-  'countOrderLines',
-  'hasOrderLine',
-  'hasOrderLines',
-  'setOrderLines',
-  'addOrderLine',
-  'addOrderLines',
-  'removeOrderLine',
-  'removeOrderLines',
-  'createOrderLine',
-  'getUser',
-  'setUser',
-  'createUser' ]
+  await db1MonthPrices[0].addOrderLine(ord1Line1)
+  await dbSpecies[0].addOrderLine(ord1Line1)
+  await ord1Line1
+    .set('subTotal', db1MonthPrices[0].currentPrice * ord1Line1.quantity)
+    .save()
 
-Prices
-===========================
-[ '_customGetters',
-  '_customSetters',
-  'validators',
-  '_hasCustomGetters',
-  '_hasCustomSetters',
-  'rawAttributes',
-  'attributes',
-  '_isAttribute',
-  'getOrderLines',
-  'countOrderLines',
-  'hasOrderLine',
-  'hasOrderLines',
-  'setOrderLines',
-  'addOrderLine',
-  'addOrderLines',
-  'removeOrderLine',
-  'removeOrderLines',
-  'createOrderLine',
-  'getSpecies',
-  'setSpecies',
-  'createSpecies' ]
+  await db1MonthPrices[1].addOrderLine(ord1Line2)
+  await dbSpecies[1].addOrderLine(ord1Line2)
+  await ord1Line2
+    .set('subTotal', db1MonthPrices[1].currentPrice * ord1Line2.quantity)
+    .save()
 
-    */
+  await dbOrders[0].setUser(dbUsers[4])
+  await dbOrders[0]
+    .set('totalAmount', ord1Line1.subTotal + ord1Line2.subTotal)
+    .save()
 
-  // while (orderLines.length) {
-  //   const line = orderLines.pop()
-  //   dbSpecies[0].createOrderLine(line)
-  // }
-  // console.log(Object.keys(Object.getPrototypeOf(dbSpecies[0])))
-  // const dbOrderLines = await Promise.all(
-  //   orderLines.map(line => OrderLine.create(line))
-  // )
+  //  Order #2
+  const ord2Line1 = await dbOrders[1].createOrderLine({quantity: 3})
+  const ord2Line2 = await dbOrders[1].createOrderLine({quantity: 2})
 
-  // const orderLines = []
-  // for (let i = 0; i < dbSpecies.length; i++) {
-  //   await dbPrices[i].setSpecies(dbSpecies[i])
-  //   const orderLine = await dbPrices[i].createOrderLine({quantity: i + 1})
-  //   orderLines.push(orderLine)
-  //   await dbSpecies[i].setOrderLines([orderLine])
-  // }
+  await db6MonthPrices[0].addOrderLine(ord2Line1)
+  await dbSpecies[0].addOrderLine(ord2Line1)
+  await ord2Line1
+    .set('subTotal', db6MonthPrices[0].currentPrice * ord2Line1.quantity)
+    .save()
 
-  // let index = 8
-  // let length = 4
-  // for (let i = 0; i < dbOrders.length; i++) {
-  //   await dbOrders[i].setOrderLines(orderLines.slice(index, index + length))
-  //   index -= 4
-  // }
+  await db6MonthPrices[1].addOrderLine(ord2Line2)
+  await dbSpecies[1].addOrderLine(ord2Line2)
+  await ord2Line2
+    .set('subTotal', db6MonthPrices[1].currentPrice * ord2Line2.quantity)
+    .save()
+
+  await dbOrders[1].setUser(dbUsers[4])
+  await dbOrders[1]
+    .set('totalAmount', ord2Line1.subTotal + ord2Line2.subTotal)
+    .save()
 
   console.log(`seeded ${users.length} users`)
   console.log(`seeded ${species.length} animals`)
