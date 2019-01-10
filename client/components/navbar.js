@@ -17,18 +17,28 @@ class Navbar extends Component {
     return (
       <AppBar position="sticky">
         <Toolbar>
-          <IconButton color="inherit">
-            <Home />
-          </IconButton>
-          <Button color="inherit">
-            <Typography>Birds</Typography>
-          </Button>
-          <Button color="inherit">
-            <Typography>Mammals</Typography>
-          </Button>
-          <Button color="inherit">
-            <Typography>Fish</Typography>
-          </Button>
+          <Grid container alignItems="center" spacing={16} direction="row">
+            <Grid item>
+              <IconButton color="inherit">
+                <Home />
+              </IconButton>
+            </Grid>
+            <Grid item>
+              <Button color="inherit">
+                <Typography>Birds</Typography>
+              </Button>
+            </Grid>
+            <Grid item>
+              <Button color="inherit">
+                <Typography>Mammals</Typography>
+              </Button>
+            </Grid>
+            <Grid item>
+              <Button color="inherit">
+                <Typography>Fish</Typography>
+              </Button>
+            </Grid>
+          </Grid>
         </Toolbar>
       </AppBar>
     )
