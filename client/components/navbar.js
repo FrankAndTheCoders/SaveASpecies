@@ -1,57 +1,60 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
-import {logout} from '../store'
+import {NavLink} from 'react-router-dom'
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  Grid,
+  Button,
+  IconButton,
+  CardMedia
+} from '@material-ui/core'
+import {Home, Menu} from '@material-ui/icons'
 
-const Navbar = ({handleClick, isLoggedIn}) => (
-  <div>
-    <h1>Save A Species</h1>
-    <nav>
-      {isLoggedIn ? (
-        <div>
-          {/* The navbar will show these links after you log in */}
-          <Link to="/home">Home</Link>
-          <a href="#" onClick={handleClick}>
-            Logout
-          </a>
-        </div>
-      ) : (
-        <div>
-          {/* The navbar will show these links before you log in */}
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Sign Up</Link>
-          <br />
-        </div>
-      )}
-    </nav>
-    <hr />
-  </div>
-)
-
-/**
- * CONTAINER
- */
-const mapState = state => {
-  return {
-    isLoggedIn: !!state.user.id
+class Navbar extends Component {
+  render() {
+    return (
+      <AppBar position="sticky">
+        <Toolbar>
+          <IconButton color="inherit">
+            <Home />
+          </IconButton>
+          <Button color="inherit">
+            <Typography>Birds</Typography>
+          </Button>
+          <Button color="inherit">
+            <Typography>Mammals</Typography>
+          </Button>
+          <Button color="inherit">
+            <Typography>Fish</Typography>
+          </Button>
+        </Toolbar>
+      </AppBar>
+    )
   }
 }
 
-const mapDispatch = dispatch => {
-  return {
-    handleClick() {
-      dispatch(logout())
-    }
-  }
-}
+// const mapState = state => {
+//   return {
+//     isLoggedIn: !!state.user.id
+//   }
+// }
 
-export default connect(mapState, mapDispatch)(Navbar)
+// const mapDispatch = dispatch => {
+//   return {
+//     handleClick() {
+//       dispatch(logout())
+//     }
+//   }
+// }
 
-/**
- * PROP TYPES
- */
-Navbar.propTypes = {
-  handleClick: PropTypes.func.isRequired,
-  isLoggedIn: PropTypes.bool.isRequired
-}
+export default connect(null, null)(Navbar)
+
+// /**
+//  * PROP TYPES
+//  */
+// Navbar.propTypes = {
+//   handleClick: PropTypes.func.isRequired,
+//   isLoggedIn: PropTypes.bool.isRequired
+// }
