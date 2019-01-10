@@ -14,6 +14,7 @@ const Species = db.define('species', {
   },
   inventory: {
     type: Sequilize.INTEGER,
+    allowNull: false,
     validate: {
       min: 0
     }
