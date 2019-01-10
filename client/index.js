@@ -8,12 +8,12 @@ import App from './app'
 
 // material ui theme
 import {createMuiTheme, MuiThemeProvider} from '@material-ui/core/styles'
-import {green, orange} from '@material-ui/core/colors'
+import {green, orange, lightBlue, blue} from '@material-ui/core/colors'
 
 const theme = createMuiTheme({
   palette: {
     primary: green,
-    secondary: orange
+    secondary: blue
   },
   typography: {
     useNextVariants: true
