@@ -22,6 +22,37 @@ async function seed() {
   )
   const dbOrders = await Promise.all(orders.map(order => Order.create(order)))
 
+  // console.log(Object.keys(Object.getPrototypeOf(dbOrders[0])))
+  // await OrderLine.create({quantity: 2, subTotal: 1})
+  /*
+Orders
+========================
+[ '_customGetters',
+  '_customSetters',
+  'validators',
+  '_hasCustomGetters',
+  '_hasCustomSetters',
+  'rawAttributes',
+  'attributes',
+  '_isAttribute',
+  'getOrderLines',
+  'countOrderLines',
+  'hasOrderLine',
+  'hasOrderLines',
+  'setOrderLines',
+  'addOrderLine',
+  'addOrderLines',
+  'removeOrderLine',
+  'removeOrderLines',
+  'createOrderLine',
+  'getUser',
+  'setUser',
+  'createUser' ]
+
+
+
+    */
+
   // while (orderLines.length) {
   //   const line = orderLines.pop()
   //   dbSpecies[0].createOrderLine(line)
