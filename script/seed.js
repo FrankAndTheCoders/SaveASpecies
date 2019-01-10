@@ -6,8 +6,15 @@ const {User, Species, Price, Order, OrderLine} = require('../server/db/models')
 //  Seed Data
 const species = require('./species')
 const users = require('./users')
-const {currentPrices, pastPrices, futurPrices} = require('./prices')
-const allPrices = [...currentPrices, ...pastPrices, ...futurPrices]
+const {
+  currentPrices,
+  pastPrices,
+  futurPrices,
+  monthAgoPrices,
+  sixMonthsAgoPrices,
+  quarterAgoPrices
+} = require('./prices')
+// const allPrices = [...currentPrices, ...pastPrices, ...futurPrices]
 const orders = require('./orders')
 const orderLines = require('./orderLines')
 
@@ -17,14 +24,60 @@ async function seed() {
 
   const dbSpecies = await Promise.all(species.map(anml => Species.create(anml)))
   const dbUsers = await Promise.all(users.map(user => User.create(user)))
-  const dbPrices = await Promise.all(
-    allPrices.map(price => Price.create(price))
+  // const dbPrices = await Promise.all(
+  //   allPrices.map(price => Price.create(price))
+  // )
+  const dbCurrentPrices = await Promise.all(
+    currentPrices.map(price => Price.create(price))
+  )
+  const dbFuturePrices = await Promise.all(
+    futurPrices.map(price => Price.create(price))
+  )
+  const db1MonthPrices = await Promise.all(
+    monthAgoPrices.map(price => Price.create(price))
+  )
+  const db3MonthPrices = await Promise.all(
+    sixMonthsAgoPrices.map(price => Price.create(price))
+  )
+  const db6MonthPrices = await Promise.all(
+    quarterAgoPrices.map(price => Price.create(price))
   )
   const dbOrders = await Promise.all(orders.map(order => Order.create(order)))
 
-  // console.log(Object.keys(Object.getPrototypeOf(dbOrders[0])))
+  // console.log(Object.keys(Object.getPrototypeOf(dbCurrentPrices[0])))
+
   // await OrderLine.create({quantity: 2, subTotal: 1})
+
+  for (let i = 0; i < dbCurrentPrices.length; i++) {
+    await dbCurrentPrices[i].setSpecies(dbSpecies[i])
+    await dbFuturePrices[i].setSpecies(dbSpecies[i])
+    await db1MonthPrices[i].setSpecies(dbSpecies[i])
+    await db3MonthPrices[i].setSpecies(dbSpecies[i])
+    await db6MonthPrices[i].setSpecies(dbSpecies[i])
+  }
+
   /*
+Species
+=========================
+[ '_customGetters',
+  '_customSetters',
+  'validators',
+  '_hasCustomGetters',
+  '_hasCustomSetters',
+  'rawAttributes',
+  'attributes',
+  '_isAttribute',
+  'getOrderLines',
+  'countOrderLines',
+  'hasOrderLine',
+  'hasOrderLines',
+  'setOrderLines',
+  'addOrderLine',
+  'addOrderLines',
+  'removeOrderLine',
+  'removeOrderLines',
+  'createOrderLine' ]
+
 Orders
 ========================
 [ '_customGetters',
@@ -49,7 +102,29 @@ Orders
   'setUser',
   'createUser' ]
 
-
+Prices
+===========================
+[ '_customGetters',
+  '_customSetters',
+  'validators',
+  '_hasCustomGetters',
+  '_hasCustomSetters',
+  'rawAttributes',
+  'attributes',
+  '_isAttribute',
+  'getOrderLines',
+  'countOrderLines',
+  'hasOrderLine',
+  'hasOrderLines',
+  'setOrderLines',
+  'addOrderLine',
+  'addOrderLines',
+  'removeOrderLine',
+  'removeOrderLines',
+  'createOrderLine',
+  'getSpecies',
+  'setSpecies',
+  'createSpecies' ]
 
     */
 

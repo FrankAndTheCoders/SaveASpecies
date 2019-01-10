@@ -108,7 +108,7 @@ const pastPrices = [
   ...sixMonthsAgoPrices
 ]
 
-const futurPrices = [
+const futurePrices = [
   {currentPrice: 400000, effectiveDate: sixMonthsAgo},
   {currentPrice: 8000000, effectiveDate: sixMonthsAgo},
   {currentPrice: 5500000, effectiveDate: sixMonthsAgo},
@@ -123,4 +123,11 @@ const futurPrices = [
   {currentPrice: 2100000, effectiveDate: sixMonthsAgo}
 ]
 
-module.exports = {currentPrices, pastPrices, futurPrices}
+module.exports = {
+  currentPrices,
+  pastPrices,
+  monthAgoPrices,
+  sixMonthsAgoPrices,
+  quarterAgoPrices,
+  futurPrices: futurePrices
+}
