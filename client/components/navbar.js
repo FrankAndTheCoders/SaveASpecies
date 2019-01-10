@@ -10,7 +10,7 @@ import {
   IconButton,
   CardMedia
 } from '@material-ui/core'
-import {Home, Menu} from '@material-ui/icons'
+import {Home, ShoppingCart, Menu} from '@material-ui/icons'
 
 class Navbar extends Component {
   constructor() {
@@ -57,6 +57,13 @@ class Navbar extends Component {
 
           <Grid container justify="flex-end" alignItems="center" spacing={16}>
             {/* {this.props.user.id ? */}
+            <Grid item>
+              <NavLink to="/cart">
+                <IconButton color="inherit">
+                  <ShoppingCart />
+                </IconButton>
+              </NavLink>
+            </Grid>
 
             <Grid item>
               <NavLink to="/user">
