@@ -1,93 +1,20 @@
 'use strict'
 
 const db = require('../server/db')
+//  Db Models
 const {User, Species, Price, Order, OrderLine} = require('../server/db/models')
-
+//  Seed Data
 const species = require('./species')
-
 const users = require('./users')
+const prices = require('./prices')
+const orders = require('./orders')
+const orderLines = require('./orderLines')
 
-const prices = [
-  {
-    currentPrice: 175000,
-    effectiveDate: new Date('2019-01-02')
-  },
-  {
-    currentPrice: 230000,
-    effectiveDate: new Date('2019-01-03')
-  },
-  {
-    currentPrice: 300000,
-    effectiveDate: new Date('2019-01-04')
-  },
-  {
-    currentPrice: 270000,
-    effectiveDate: new Date('2019-01-05')
-  },
-  {
-    currentPrice: 160000,
-    effectiveDate: new Date('2019-01-01')
-  },
-  {
-    currentPrice: 120000,
-    effectiveDate: new Date('2019-01-02')
-  },
-  {
-    currentPrice: 100000,
-    effectiveDate: new Date('2019-01-02')
-  },
-  {
-    currentPrice: 200000,
-    effectiveDate: new Date('2019-01-03')
-  },
-  {
-    currentPrice: 235000,
-    effectiveDate: new Date('2019-01-04')
-  },
-  {
-    currentPrice: 250000,
-    effectiveDate: new Date('2019-01-06')
-  },
-  {
-    currentPrice: 130000,
-    effectiveDate: new Date('2019-01-06')
-  },
-  {
-    currentPrice: 210000,
-    effectiveDate: new Date('2019-01-03')
-  }
-]
-
+//  Dates
 const today = new Date()
+const yesterday = new Date().setDate(today.getDate() - 1)
 const weekAgo = new Date().setDate(today.getDate() - 7)
 const monthAgo = new Date().setDate(today.getDate() - 30)
-
-const orders = [
-  {totalAmount: 2500000},
-  {purchaseDate: weekAgo, totalAmount: 3800000, isPurchased: true},
-  {purchaseDate: monthAgo, totalAmount: 5750000, isPurchased: true}
-]
-
-const orderLines = [
-  {quantity: 2},
-  {quantity: 3},
-  {quantity: 5},
-  {quantity: 7},
-  {quantity: 11},
-  {quantity: 1},
-  {quantity: 2},
-  {quantity: 3},
-  {quantity: 4},
-  {quantity: 5},
-  {quantity: 6},
-  {quantity: 1},
-  {quantity: 2},
-  {quantity: 3},
-  {quantity: 6},
-  {quantity: 9},
-  {quantity: 10},
-  {quantity: 8}
-]
 
 async function seed() {
   await db.sync({force: true})

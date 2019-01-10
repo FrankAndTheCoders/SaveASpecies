@@ -1,0 +1,20 @@
+module.exports = [
+  {quantity: 2},
+  {quantity: 3},
+  {quantity: 5},
+  {quantity: 7},
+  {quantity: 11},
+  {quantity: 1},
+  {quantity: 2},
+  {quantity: 3},
+  {quantity: 4},
+  {quantity: 5},
+  {quantity: 6},
+  {quantity: 1},
+  {quantity: 2},
+  {quantity: 3},
+  {quantity: 6},
+  {quantity: 9},
+  {quantity: 10},
+  {quantity: 8}
+]
