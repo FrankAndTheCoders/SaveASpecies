@@ -165,13 +165,17 @@ const styles = theme => ({
   }
 })
 
-class AllSpecies extends Component {
-  // componentDidMount() {
-  //   this.props.getSpecies()
-  // }
+class SingleCategory extends Component {
+  //   componentDidMount() {
+  //     this.props.getSpecies()
+  //   }
 
   render() {
     const {classes} = this.props
+    const animalGroup = this.props.match.params.animalGroup
+    const category = species.filter(
+      group => group.category.toLowerCase() === animalGroup
+    )
     return (
       <div className="allSpecies">
         <Typography
@@ -179,22 +183,17 @@ class AllSpecies extends Component {
           color="inherit"
           className={classes.speciesText}
         >
-          All Species
+          {animalGroup[0].toUpperCase() + animalGroup.slice(1)}
         </Typography>
         <Grid container spacing={40}>
-          {species.map(indSpecies => (
-            <Grid item xs={3} key={indSpecies.id}>
+          {category.map(group => (
+            <Grid item xs={3} key={group.id}>
               <Card>
-                <CardMedia
-                  className={classes.media}
-                  image={indSpecies.ImageUrl}
-                />
+                <CardMedia className={classes.media} image={group.ImageUrl} />
                 <CardContent>
-                  <Typography className={classes.text}>
-                    {indSpecies.name}
-                  </Typography>
+                  <Typography className={classes.text}>{group.name}</Typography>
                   <Typography className={classes.text}>{`$${
-                    indSpecies.price.currentPrice
+                    group.price.currentPrice
                   }`}</Typography>
                 </CardContent>
                 <CardActions>
@@ -220,21 +219,18 @@ class AllSpecies extends Component {
   }
 }
 
-AllSpecies.propTypes = {
+SingleCategory.propTypes = {
   classes: PropTypes.object.isRequired
 }
-
-// const mapState = state => ({
-//   species: state.species.species
-// })
 
 // const mapDispatch = dispatch => ({
 //   fetchAllSpecies: () => dispatch(getSpecies())
 // })
 
-// const ConnectedAllSpecies = withRouter(
-//   connect(mapState, mapDispatch)(AllSpecies)
+// const ConnectedSingleCategory = withRouter(
+//   connect(null, mapDispatch)(SingleCategory)
 // )
 
-// export default withStyles(styles)(ConnectedAllSpecies)
-export default withStyles(styles)(AllSpecies)
+// export default withStyles(styles)(ConnectedSingleCategory)
+
+export default withStyles(styles)(SingleCategory)
