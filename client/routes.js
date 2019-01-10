@@ -2,7 +2,13 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
-import {AllSpecies, AuthForm, SingleSpecies, SingleCategory} from './components'
+import {
+  AllSpecies,
+  SingleSpecies,
+  SingleCategory,
+  Login,
+  Signup
+} from './components'
 import {me} from './store'
 import {format} from 'url'
 
@@ -21,8 +27,14 @@ class Routes extends Component {
       <Switch>
         {/* Routes placed here are available to all visitors */}
         <Route exact path="/" component={AllSpecies} />
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/signup" component={Signup} />
         <Route exact path="/:animalGroup" component={SingleCategory} />
-        <Route path="/login" component={AuthForm} />
+        <Route
+          exact
+          path="/:animalGroup/:speciesName"
+          component={SingleSpecies}
+        />
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
@@ -30,7 +42,7 @@ class Routes extends Component {
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
-        <Route component={AuthForm} />
+        {/* <Route component={AuthForm} /> */}
       </Switch>
     )
   }
