@@ -10,10 +10,9 @@ const {
 } = require('./dates')
 
 module.exports = [
-  // {totalAmount: 2500000},
   //  CD -  2 past purchases
-  {purchaseDate: yesterday, totalAmount: 3800000, isPurchased: true},
-  {purchaseDate: weekAgo, totalAmount: 5750000, isPurchased: true},
+  {purchaseDate: monthAgo, isPurchased: true},
+  {purchaseDate: sixMonthsAgo, totalAmount: 5750000, isPurchased: true},
   //  EF -  2 past purchases with different purchase points
   {purchaseDate: quarterAgo, totalAmount: 3800000, isPurchased: true},
   {purchaseDate: monthAgo, totalAmount: 5750000, isPurchased: true},
