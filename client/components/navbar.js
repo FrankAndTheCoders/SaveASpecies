@@ -53,39 +53,34 @@ class Navbar extends Component {
                 <Button color="inherit">Fish</Button>
               </NavLink>
             </Grid>
+          </Grid>
 
-            <Grid
-              container
-              direction="row-reverse"
-              alignItems="center"
-              spacing={16}
-            >
-              {/* {this.props.user.id ?
+          <Grid container justify="flex-end" alignItems="center" spacing={16}>
+            {/* {this.props.user.id ? */}
 
-                <Grid item>
-                <Typography>{this.props.user.firstName}</Typography>
-                <NavLink to="/user">
-                  <Button color="inherit">
-                    {this.props.user.firstName}
-                  </Button>
-                </NavLink>
-                <NavLink to="/login">
-                  <Button color="inherit" onClick={this.handleLogout}>
-                    Logout
-                  </Button>
-                </NavLink>
-              </Grid>
-              :
+            <Grid item>
+              <NavLink to="/user">
+                <Button color="inherit">Stuart</Button>
+              </NavLink>
+            </Grid>
+
+            <Grid item>
+              <NavLink to="/login">
+                <Button color="inherit" onClick={this.handleLogout}>
+                  Logout
+                </Button>
+              </NavLink>
+            </Grid>
+          </Grid>
+
+          {/* :
               <Grid item>
                 <NavLink to="/login">
                   <Button color="inherit">
                     Login
                   </Button>
                 </NavLink>
-              </Grid>
-              } */}
-            </Grid>
-          </Grid>
+              </Grid> */}
         </Toolbar>
       </AppBar>
     )
