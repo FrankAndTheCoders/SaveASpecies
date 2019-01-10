@@ -1,10 +1,13 @@
-//  Dates
-const today = new Date()
-const yesterday = new Date().setDate(today.getDate() - 1)
-const weekAgo = new Date().setDate(today.getDate() - 7)
-const monthAgo = new Date().setDate(today.getDate() - 30)
-const quarterAgo = new Date().setDate(today.getDate() - 90)
-const nextWeek = new Date().setDate(today.getDate() + 7)
+const {
+  today,
+  yesterday,
+  tomorrow,
+  weekAgo,
+  nextWeek,
+  monthAgo,
+  quarterAgo,
+  sixMonthsAgo
+} = require('./dates')
 
 module.exports = [
   // {totalAmount: 2500000},

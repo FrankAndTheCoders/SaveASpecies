@@ -6,15 +6,10 @@ const {User, Species, Price, Order, OrderLine} = require('../server/db/models')
 //  Seed Data
 const species = require('./species')
 const users = require('./users')
-const prices = require('./prices')
+const {currentPrices, pastPrices, futurPrices} = require('./prices')
+const allPrices = [...currentPrices, ...pastPrices, ...futurPrices]
 const orders = require('./orders')
 const orderLines = require('./orderLines')
-
-//  Dates
-const today = new Date()
-const yesterday = new Date().setDate(today.getDate() - 1)
-const weekAgo = new Date().setDate(today.getDate() - 7)
-const monthAgo = new Date().setDate(today.getDate() - 30)
 
 async function seed() {
   await db.sync({force: true})
@@ -22,13 +17,15 @@ async function seed() {
 
   const dbSpecies = await Promise.all(species.map(anml => Species.create(anml)))
   const dbUsers = await Promise.all(users.map(user => User.create(user)))
-  const dbPrices = await Promise.all(prices.map(price => Price.create(price)))
+  const dbPrices = await Promise.all(
+    allPrices.map(price => Price.create(price))
+  )
   const dbOrders = await Promise.all(orders.map(order => Order.create(order)))
 
-  while (orderLines.length) {
-    const line = orderLines.pop()
-    dbSpecies[0].createOrderLine(line)
-  }
+  // while (orderLines.length) {
+  //   const line = orderLines.pop()
+  //   dbSpecies[0].createOrderLine(line)
+  // }
   // console.log(Object.keys(Object.getPrototypeOf(dbSpecies[0])))
   // const dbOrderLines = await Promise.all(
   //   orderLines.map(line => OrderLine.create(line))
@@ -42,14 +39,16 @@ async function seed() {
   //   await dbSpecies[i].setOrderLines([orderLine])
   // }
 
-  let index = 8
-  let length = 4
-  for (let i = 0; i < dbOrders.length; i++) {
-    await dbOrders[i].setOrderLines(orderLines.slice(index, index + length))
-    index -= 4
-  }
+  // let index = 8
+  // let length = 4
+  // for (let i = 0; i < dbOrders.length; i++) {
+  //   await dbOrders[i].setOrderLines(orderLines.slice(index, index + length))
+  //   index -= 4
+  // }
 
   console.log(`seeded ${users.length} users`)
+  console.log(`seeded ${species.length} animals`)
+  console.log(`seeded ${orders.length} orders`)
   console.log(`seeded successfully`)
 }
 
