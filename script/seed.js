@@ -102,77 +102,55 @@ const species = [
   }
 ]
 
-const users = [
-  {
-    firstName: 'Frank',
-    lastName: 'FullStack',
-    email: 'frank@email.com',
-    password: '123',
-    role: 'admin'
-  },
-  {
-    firstName: 'Stuart',
-    lastName: 'Byte',
-    email: 'stuart@email.com',
-    password: '456',
-    role: 'user'
-  },
-  {
-    firstName: 'Rui',
-    lastName: 'Nerds',
-    email: 'rui@email.com',
-    password: '789',
-    role: 'user'
-  }
-]
+const users = require('./users')
 
 const prices = [
   {
-    currentPrice: 1750,
+    currentPrice: 175000,
     effectiveDate: new Date('2019-01-02')
   },
   {
-    currentPrice: 2300,
+    currentPrice: 230000,
     effectiveDate: new Date('2019-01-03')
   },
   {
-    currentPrice: 3000,
+    currentPrice: 300000,
     effectiveDate: new Date('2019-01-04')
   },
   {
-    currentPrice: 2700,
+    currentPrice: 270000,
     effectiveDate: new Date('2019-01-05')
   },
   {
-    currentPrice: 1600,
+    currentPrice: 160000,
     effectiveDate: new Date('2019-01-01')
   },
   {
-    currentPrice: 1200,
+    currentPrice: 120000,
     effectiveDate: new Date('2019-01-02')
   },
   {
-    currentPrice: 1000,
+    currentPrice: 100000,
     effectiveDate: new Date('2019-01-02')
   },
   {
-    currentPrice: 2000,
+    currentPrice: 200000,
     effectiveDate: new Date('2019-01-03')
   },
   {
-    currentPrice: 2350,
+    currentPrice: 235000,
     effectiveDate: new Date('2019-01-04')
   },
   {
-    currentPrice: 2500,
+    currentPrice: 250000,
     effectiveDate: new Date('2019-01-06')
   },
   {
-    currentPrice: 1300,
+    currentPrice: 130000,
     effectiveDate: new Date('2019-01-06')
   },
   {
-    currentPrice: 2100,
+    currentPrice: 210000,
     effectiveDate: new Date('2019-01-03')
   }
 ]
@@ -187,24 +165,52 @@ const orders = [
   {purchaseDate: monthAgo, totalAmount: 5750000, isPurchased: true}
 ]
 
+const orderLines = [
+  {quantity: 2},
+  {quantity: 3},
+  {quantity: 5},
+  {quantity: 7},
+  {quantity: 11},
+  {quantity: 1},
+  {quantity: 2},
+  {quantity: 3},
+  {quantity: 4},
+  {quantity: 5},
+  {quantity: 6},
+  {quantity: 1},
+  {quantity: 2},
+  {quantity: 3},
+  {quantity: 6},
+  {quantity: 9},
+  {quantity: 10},
+  {quantity: 8}
+]
+
 async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
 
-  const dbSpecies = await Promise.all(
-    species.map(animal => Species.create(animal))
-  )
+  const dbSpecies = await Promise.all(species.map(anml => Species.create(anml)))
   const dbUsers = await Promise.all(users.map(user => User.create(user)))
   const dbPrices = await Promise.all(prices.map(price => Price.create(price)))
   const dbOrders = await Promise.all(orders.map(order => Order.create(order)))
 
-  const orderLines = []
-  for (let i = 0; i < dbSpecies.length; i++) {
-    await dbPrices[i].setSpecies(dbSpecies[i])
-    const orderLine = await dbPrices[i].createOrderLine({quantity: i + 1})
-    orderLines.push(orderLine)
-    await dbSpecies[i].setOrderLines([orderLine])
+  while (orderLines.length) {
+    const line = orderLines.pop()
+    dbSpecies[0].createOrderLine(line)
   }
+  // console.log(Object.keys(Object.getPrototypeOf(dbSpecies[0])))
+  // const dbOrderLines = await Promise.all(
+  //   orderLines.map(line => OrderLine.create(line))
+  // )
+
+  // const orderLines = []
+  // for (let i = 0; i < dbSpecies.length; i++) {
+  //   await dbPrices[i].setSpecies(dbSpecies[i])
+  //   const orderLine = await dbPrices[i].createOrderLine({quantity: i + 1})
+  //   orderLines.push(orderLine)
+  //   await dbSpecies[i].setOrderLines([orderLine])
+  // }
 
   let index = 8
   let length = 4
