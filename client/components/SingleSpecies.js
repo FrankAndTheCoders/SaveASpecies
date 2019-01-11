@@ -108,7 +108,7 @@ SingleSpecies.propTypes = {
 // })
 
 // const mapDispatch = dispatch => ({
-//   fetchSingleSpecies: (speciesId) => dispatch()
+//   fetchSingleSpecies: (speciesName) => dispatch()
 // })
 
 // const ConnectedSingleCategory = withRouter(
