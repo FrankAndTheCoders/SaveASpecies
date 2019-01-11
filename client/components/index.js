@@ -5,7 +5,8 @@
  */
 export {default as Navbar} from './Navbar'
 export {default as UserHome} from './User-home'
-export {Login, Signup} from './AuthForm'
+export {default as Login} from './Login'
+export {default as SignUp} from './SignUp'
 export {default as AllSpecies} from './AllSpecies'
 export {default as SingleCategory} from './SingleCategory'
 export {default as SingleSpecies} from './SingleSpecies'
