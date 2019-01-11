@@ -69,9 +69,13 @@ class SingleCategory extends Component {
                       </Button>
                     </Grid>
                     <Grid item>
-                      <Button variant="outlined" className={classes.button}>
-                        View More Info
-                      </Button>
+                      <Link
+                        to={`${animalGroup}/${group.name.split(' ').join('')}`}
+                      >
+                        <Button variant="outlined" className={classes.button}>
+                          View More Info
+                        </Button>
+                      </Link>
                     </Grid>
                   </Grid>
                 </CardActions>
