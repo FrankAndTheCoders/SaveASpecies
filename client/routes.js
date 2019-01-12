@@ -7,7 +7,7 @@ import {
   SingleSpecies,
   SingleCategory,
   Login,
-  Signup
+  SignUp
 } from './components'
 import {me} from './store'
 import {format} from 'url'
@@ -28,7 +28,7 @@ class Routes extends Component {
         {/* Routes placed here are available to all visitors */}
         <Route exact path="/" component={AllSpecies} />
         <Route exact path="/login" component={Login} />
-        <Route exact path="/signup" component={Signup} />
+        <Route exact path="/signup" component={SignUp} />
         <Route exact path="/:animalGroup" component={SingleCategory} />
         <Route
           exact
