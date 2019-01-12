@@ -1,30 +1,41 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
+import {NavLink} from 'react-router-dom'
+
+//  Save-A-Species Components
+import Routes from './routes'
+
+//  Material-UI Components
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import {withStyles} from '@material-ui/core/styles'
-import Drawer from '@material-ui/core/Drawer'
 import AppBar from '@material-ui/core/AppBar'
-import Toolbar from '@material-ui/core/Toolbar'
+import Button from '@material-ui/core/Button'
 import CssBaseline from '@material-ui/core/CssBaseline'
-import List from '@material-ui/core/List'
-import Typography from '@material-ui/core/Typography'
 import Divider from '@material-ui/core/Divider'
+import Drawer from '@material-ui/core/Drawer'
+import Grid from '@material-ui/core/Grid'
+import Icon from '@material-ui/core/Icon'
 import IconButton from '@material-ui/core/IconButton'
-import MenuIcon from '@material-ui/icons/Menu'
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
-import ChevronRightIcon from '@material-ui/icons/ChevronRight'
+import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
-import InboxIcon from '@material-ui/icons/MoveToInbox'
-import MailIcon from '@material-ui/icons/Mail'
-import Icon from '@material-ui/core/Icon'
-import ShoppingCart from '@material-ui/icons/ShoppingCart'
-import Close from '@material-ui/icons/Close'
-import Routes from './routes'
+import Toolbar from '@material-ui/core/Toolbar'
+// import Typography from '@material-ui/core/Typography'
+// import {AppBar, Toolbar, Grid, Button, IconButton} from '@material-ui/core'
 
-const drawerWidth = 240
+//  Material-UI Icons
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
+import ChevronRightIcon from '@material-ui/icons/ChevronRight'
+import InboxIcon from '@material-ui/icons/MoveToInbox'
+import MenuIcon from '@material-ui/icons/Menu'
+import MailIcon from '@material-ui/icons/Mail'
+import Close from '@material-ui/icons/Close'
+import Home from '@material-ui/icons/Home'
+import ShoppingCart from '@material-ui/icons/ShoppingCart'
+
+const drawerWidth = 280
 
 const styles = theme => ({
   root: {
@@ -110,17 +121,61 @@ class App extends React.Component {
           })}
         >
           <Toolbar disableGutters={!open}>
-            <IconButton
-              color="inherit"
-              aria-label="Open drawer"
-              onClick={this.handleDrawerOpen}
-              className={classNames(classes.menuButton, open && classes.hide)}
-            >
-              <ShoppingCart />
-            </IconButton>
-            <Typography variant="h6" color="inherit" noWrap>
-              Persistent drawer
-            </Typography>
+            <Grid item>
+              <NavLink to="/">
+                <IconButton color="inherit">
+                  <Home />
+                </IconButton>
+              </NavLink>
+            </Grid>
+
+            <Grid item>
+              <NavLink to="/birds">
+                <Button color="inherit">Birds</Button>
+              </NavLink>
+            </Grid>
+
+            <Grid item>
+              <NavLink to="/mammals">
+                <Button color="inherit">Mammals</Button>
+              </NavLink>
+            </Grid>
+
+            <Grid item>
+              <NavLink to="/fish">
+                <Button color="inherit">Fish</Button>
+              </NavLink>
+            </Grid>
+
+            <Grid container justify="flex-end" alignItems="center" spacing={16}>
+              <Grid item>
+                <IconButton
+                  color="inherit"
+                  aria-label="Open drawer"
+                  onClick={this.handleDrawerOpen}
+                  className={classNames(
+                    classes.menuButton,
+                    open && classes.hide
+                  )}
+                >
+                  <ShoppingCart />
+                </IconButton>
+              </Grid>
+
+              <Grid item>
+                <NavLink to="/user">
+                  <Button color="inherit">Stuart</Button>
+                </NavLink>
+              </Grid>
+
+              <Grid item>
+                <NavLink to="/login">
+                  <Button color="inherit" onClick={this.handleLogout}>
+                    Logout
+                  </Button>
+                </NavLink>
+              </Grid>
+            </Grid>
           </Toolbar>
         </AppBar>
         <main
@@ -129,36 +184,6 @@ class App extends React.Component {
           })}
         >
           <div className={classes.drawerHeader} />
-          {/* <Typography paragraph>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Rhoncus
-            dolor purus non enim praesent elementum facilisis leo vel. Risus at
-            ultrices mi tempus imperdiet. Semper risus in hendrerit gravida
-            rutrum quisque non tellus. Convallis convallis tellus id interdum
-            velit laoreet id donec ultrices. Odio morbi quis commodo odio aenean
-            sed adipiscing. Amet nisl suscipit adipiscing bibendum est ultricies
-            integer quis. Cursus euismod quis viverra nibh cras. Metus vulputate
-            eu scelerisque felis imperdiet proin fermentum leo. Mauris commodo
-            quis imperdiet massa tincidunt. Cras tincidunt lobortis feugiat
-            vivamus at augue. At augue eget arcu dictum varius duis at
-            consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem
-            donec massa sapien faucibus et molestie ac.
-          </Typography>
-          <Typography paragraph>
-            Consequat mauris nunc congue nisi vitae suscipit. Fringilla est
-            ullamcorper eget nulla facilisi etiam dignissim diam. Pulvinar
-            elementum integer enim neque volutpat ac tincidunt. Ornare
-            suspendisse sed nisi lacus sed viverra tellus. Purus sit amet
-            volutpat consequat mauris. Elementum eu facilisis sed odio morbi.
-            Euismod lacinia at quis risus sed vulputate odio. Morbi tincidunt
-            ornare massa eget egestas purus viverra accumsan in. In hendrerit
-            gravida rutrum quisque non tellus orci ac. Pellentesque nec nam
-            aliquam sem et tortor. Habitant morbi tristique senectus et.
-            Adipiscing elit duis tristique sollicitudin nibh sit. Ornare aenean
-            euismod elementum nisi quis eleifend. Commodo viverra maecenas
-            accumsan lacus vel facilisis. Nulla posuere sollicitudin aliquam
-            ultrices sagittis orci a.
-          </Typography> */}
           <Routes />
         </main>
         <Drawer
@@ -172,33 +197,13 @@ class App extends React.Component {
         >
           <div className={classes.drawerHeader}>
             <IconButton onClick={this.handleDrawerClose}>
-              {theme.direction === 'rtl' ? (
-                // <ChevronLeftIcon />
-                <Close />
-              ) : (
-                // <ChevronRightIcon />
-                <Close />
-              )}
+              <Close />
             </IconButton>
           </div>
           <Divider />
           <List>
-            {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+            {['Bird', 'Fish', 'Bear'].map((text, index) => (
               <ListItem button key={text}>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItem>
-            ))}
-          </List>
-          <Divider />
-          <List>
-            {['All mail', 'Trash', 'Spam'].map((text, index) => (
-              <ListItem button key={text}>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
                 <ListItemText primary={text} />
               </ListItem>
             ))}
