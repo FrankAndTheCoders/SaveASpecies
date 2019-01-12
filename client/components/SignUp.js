@@ -101,7 +101,12 @@ class SignUp extends Component {
               onChange={this.handleChange}
               value={this.state.confirmPassword}
             />
-            <Button onClick={this.handleSubmit}>Sign Up</Button>
+            <Button color="secondary" onClick={this.handleSubmit}>
+              Sign Up
+            </Button>
+            <Button color="secondary" href="/auth/google">
+              Sign Up With Google
+            </Button>
           </FormGroup>
         </Grid>
       </div>
