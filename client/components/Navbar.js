@@ -25,7 +25,7 @@ class Navbar extends Component {
 
   render() {
     return (
-      <AppBar position="sticky">
+      <AppBar position="fixed">
         <Toolbar>
           <Grid container alignItems="center" spacing={16} direction="row">
             <Grid item>
