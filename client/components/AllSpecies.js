@@ -71,9 +71,18 @@ class AllSpecies extends Component {
                           </Button>
                         </Grid>
                         <Grid item>
-                          <Button variant="outlined" className={classes.button}>
-                            View More Info
-                          </Button>
+                          <Link
+                            to={`${indSpecies.category.toLowerCase()}/${
+                              indSpecies.id
+                            }`}
+                          >
+                            <Button
+                              variant="outlined"
+                              className={classes.button}
+                            >
+                              View More Info
+                            </Button>
+                          </Link>
                         </Grid>
                       </Grid>
                     </CardActions>
