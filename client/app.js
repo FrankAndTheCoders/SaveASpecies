@@ -98,7 +98,7 @@ const styles = theme => ({
 
 class App extends React.Component {
   state = {
-    open: true,
+    open: false,
     cart: ['Alfa', 'Bravo', 'Charlee', 'Delta']
   }
 

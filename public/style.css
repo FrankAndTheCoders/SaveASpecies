@@ -23,3 +23,7 @@ form div {
 .allSpecies {
   padding: 5em;
 }
+
+.quantity {
+  text-align: center;
+}
