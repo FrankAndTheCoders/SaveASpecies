@@ -5,6 +5,7 @@ import {NavLink} from 'react-router-dom'
 //  Save-A-Species Components
 import Routes from './routes'
 import CartItem from './components/CartItem'
+import {default as MediaCard} from './components/MediaCard'
 
 //  Material-UI Components
 import PropTypes from 'prop-types'
@@ -97,7 +98,7 @@ const styles = theme => ({
 
 class App extends React.Component {
   state = {
-    open: false,
+    open: true,
     cart: ['Alfa', 'Bravo', 'Charlee', 'Delta']
   }
 
@@ -206,6 +207,7 @@ class App extends React.Component {
           <List>
             {this.state.cart.map((text, index) => (
               <CartItem animal={text} key={index} />
+              // <MediaCard animal={text} key={index} />
             ))}
           </List>
         </Drawer>
