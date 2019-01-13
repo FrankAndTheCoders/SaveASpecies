@@ -12,7 +12,7 @@ const GET_SINGLE_SPECIES = 'GET_SINGLE_SPECIES'
  */
 const initialState = {
   species: [],
-  singleSpecies: []
+  singleSpecies: [{name: '', ImageUrl: '', currentPrice: '', description: ''}]
 }
 
 /**
@@ -36,9 +36,9 @@ export const getSpecies = () => async dispatch => {
   }
 }
 
-export const getSingleSpecies = speciesName => async dispatch => {
+export const getSingleSpecies = speciesId => async dispatch => {
   try {
-    const {data} = await axios.get(`/api/species/${speciesName}`)
+    const {data} = await axios.get(`/api/species/${speciesId}`)
     dispatch(gotSingleSpecies(data))
   } catch (err) {
     console.error(err)

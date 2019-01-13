@@ -51,10 +51,16 @@ class AllSpecies extends Component {
             ? this.props.species.map(indSpecies => (
                 <Grid item xs={3} key={indSpecies.id}>
                   <Card>
-                    <CardMedia
-                      className={classes.media}
-                      image={indSpecies.ImageUrl}
-                    />
+                    <Link
+                      to={`${indSpecies.category.toLowerCase()}/${
+                        indSpecies.id
+                      }`}
+                    >
+                      <CardMedia
+                        className={classes.media}
+                        image={indSpecies.ImageUrl}
+                      />{' '}
+                    </Link>
                     <CardContent>
                       <Typography className={classes.text}>
                         {indSpecies.name}
@@ -71,9 +77,18 @@ class AllSpecies extends Component {
                           </Button>
                         </Grid>
                         <Grid item>
-                          <Button variant="outlined" className={classes.button}>
-                            View More Info
-                          </Button>
+                          <Link
+                            to={`${indSpecies.category.toLowerCase()}/${
+                              indSpecies.id
+                            }`}
+                          >
+                            <Button
+                              variant="outlined"
+                              className={classes.button}
+                            >
+                              View More Info
+                            </Button>
+                          </Link>
                         </Grid>
                       </Grid>
                     </CardActions>

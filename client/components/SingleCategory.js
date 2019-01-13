@@ -55,7 +55,9 @@ class SingleCategory extends Component {
           {category.map(group => (
             <Grid item xs={3} key={group.id}>
               <Card>
-                <CardMedia className={classes.media} image={group.ImageUrl} />
+                <Link to={`${animalGroup}/${group.id}`}>
+                  <CardMedia className={classes.media} image={group.ImageUrl} />
+                </Link>
                 <CardContent>
                   <Typography className={classes.text}>{group.name}</Typography>
                   <Typography className={classes.text}>{`$${group.currentPrice /
@@ -69,9 +71,7 @@ class SingleCategory extends Component {
                       </Button>
                     </Grid>
                     <Grid item>
-                      <Link
-                        to={`${animalGroup}/${group.name.split(' ').join('')}`}
-                      >
+                      <Link to={`${animalGroup}/${group.id}`}>
                         <Button variant="outlined" className={classes.button}>
                           View More Info
                         </Button>
