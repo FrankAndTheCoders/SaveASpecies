@@ -1,9 +1,12 @@
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable no-unused-vars */
 import React from 'react'
 import {NavLink} from 'react-router-dom'
 
 //  Save-A-Species Components
 import Routes from './routes'
+import CartItem from './components/CartItem'
+import PlaceOrder from './components/PlaceOrder'
 
 //  Material-UI Components
 import PropTypes from 'prop-types'
@@ -35,7 +38,7 @@ import Close from '@material-ui/icons/Close'
 import Home from '@material-ui/icons/Home'
 import ShoppingCart from '@material-ui/icons/ShoppingCart'
 
-const drawerWidth = 280
+const drawerWidth = 260
 
 const styles = theme => ({
   root: {
@@ -97,7 +100,8 @@ const styles = theme => ({
 class App extends React.Component {
   ç
   state = {
-    open: false
+    open: true,
+    cart: ['Alfa', 'Bravo', 'Charlee', 'Delta']
   }
 
   handleDrawerOpen = () => {
@@ -106,6 +110,20 @@ class App extends React.Component {
 
   handleDrawerClose = () => {
     this.setState({open: false})
+  }
+
+  removeFromCart = index => {
+    this.setState(prevState => {
+      console.log(index)
+      console.log(`The cart Before =\t${prevState.cart}`)
+      const cart = prevState.cart.filter((item, i) => i !== index)
+      console.log(`The cart after =\t${cart}`)
+      return {cart}
+    })
+  }
+
+  componentDidUpdate() {
+    console.log('Updated')
   }
 
   render() {
@@ -203,12 +221,18 @@ class App extends React.Component {
           </div>
           <Divider />
           <List>
-            {['Bird', 'Fish', 'Bear'].map((text, index) => (
-              <ListItem button key={text}>
-                <ListItemText primary={text} />
-              </ListItem>
+            {this.state.cart.map((text, index) => (
+              <CartItem
+                animal={text}
+                key={index}
+                index={index}
+                remove={this.removeFromCart}
+              />
+              // <MediaCard animal={text} key={index} />
             ))}
           </List>
+          <Divider />
+          <PlaceOrder />
         </Drawer>
       </div>
     )

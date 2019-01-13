@@ -12,7 +12,7 @@ import {green, orange, lightBlue, blue} from '@material-ui/core/colors'
 
 const theme = createMuiTheme({
   palette: {
-    primary: green,
+    primary: blue,
     secondary: lightBlue
   },
   typography: {
