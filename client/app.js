@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable no-unused-vars */
 import React from 'react'
 import {NavLink} from 'react-router-dom'
@@ -5,7 +6,7 @@ import {NavLink} from 'react-router-dom'
 //  Save-A-Species Components
 import Routes from './routes'
 import CartItem from './components/CartItem'
-import {default as MediaCard} from './components/MediaCard'
+import PlaceOrder from './components/PlaceOrder'
 
 //  Material-UI Components
 import PropTypes from 'prop-types'
@@ -110,6 +111,13 @@ class App extends React.Component {
     this.setState({open: false})
   }
 
+  removeFromCart = index => {
+    this.setState(prevState => {
+      const cart = prevState.cart.splice(index, 1)
+      return {cart}
+    })
+  }
+
   render() {
     const {classes, theme} = this.props
     const {open} = this.state
@@ -206,10 +214,16 @@ class App extends React.Component {
           <Divider />
           <List>
             {this.state.cart.map((text, index) => (
-              <CartItem animal={text} key={index} />
+              <CartItem
+                animal={text}
+                key={index}
+                remove={this.removeFromCart}
+              />
               // <MediaCard animal={text} key={index} />
             ))}
           </List>
+          <Divider />
+          <PlaceOrder />
         </Drawer>
       </div>
     )
