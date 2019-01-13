@@ -99,7 +99,7 @@ const styles = theme => ({
 
 class App extends React.Component {
   state = {
-    open: false,
+    open: true,
     cart: ['Alfa', 'Bravo', 'Charlee', 'Delta']
   }
 
@@ -113,9 +113,16 @@ class App extends React.Component {
 
   removeFromCart = index => {
     this.setState(prevState => {
-      const cart = prevState.cart.splice(index, 1)
+      console.log(index)
+      console.log(`The cart Before =\t${prevState.cart}`)
+      const cart = prevState.cart.filter((item, i) => i !== index)
+      console.log(`The cart after =\t${cart}`)
       return {cart}
     })
+  }
+
+  componentDidUpdate() {
+    console.log('Updated')
   }
 
   render() {
@@ -217,6 +224,7 @@ class App extends React.Component {
               <CartItem
                 animal={text}
                 key={index}
+                index={index}
                 remove={this.removeFromCart}
               />
               // <MediaCard animal={text} key={index} />

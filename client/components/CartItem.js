@@ -10,11 +10,14 @@ import ToolTip from '@material-ui/core/Tooltip'
 class CartItem extends React.Component {
   constructor(props) {
     super(props)
-    const {animal} = props
+    const {animal, index, remove} = props
     this.state = {
+      index,
       animal,
+      remove,
       count: 1
     }
+
     this.increaseQuantity = this.increaseQuantity.bind(this)
     this.decreaseQuantity = this.decreaseQuantity.bind(this)
   }
@@ -27,8 +30,12 @@ class CartItem extends React.Component {
 
   decreaseQuantity() {
     this.setState(prevState => {
-      const count = prevState.count === 1 ? 1 : prevState.count - 1
-      return {count}
+      if (prevState.count === 1) {
+        prevState.remove(prevState.index)
+        return
+      }
+
+      return {count: prevState.count - 1}
     })
   }
 
@@ -46,7 +53,6 @@ class CartItem extends React.Component {
               variant="contained"
               color="secondary"
               size="small"
-              disabled={this.state.count === 1}
               onClick={this.decreaseQuantity}
             >
               -
