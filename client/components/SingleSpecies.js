@@ -64,7 +64,6 @@ class SingleSpecies extends Component {
   }
 
   render() {
-    console.log(this.state)
     const indSpecies = this.props.singleSpecies[0]
     const {classes} = this.props
     return (
