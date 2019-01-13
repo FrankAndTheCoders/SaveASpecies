@@ -21,14 +21,21 @@ import {
 import PropTypes from 'prop-types'
 
 const styles = theme => ({
+  card: {
+    display: 'flex'
+  },
+  mainGrid: {
+    paddingTop: theme.spacing.unit * 10
+  },
+  needPadding: {
+    paddingLeft: theme.spacing.unit * 50,
+    paddingRight: theme.spacing.unit * 50
+  },
   text: {
-    fontSize: 20
+    fontSize: 17
   },
   button: {
     margin: theme.spacing.unit
-  },
-  media: {
-    height: 280
   },
   speciesText: {
     paddingBottom: theme.spacing.unit * 5,
@@ -67,32 +74,29 @@ class SingleSpecies extends Component {
     const indSpecies = this.props.singleSpecies[0]
     const {classes} = this.props
     return (
-      <div className="allSpecies">
-        <Typography
-          variant="h4"
-          color="inherit"
-          className={classes.speciesText}
-        >
-          {indSpecies.name}
-        </Typography>
-        <Grid container spacing={40}>
-          <Grid item xs={3}>
-            <Card>
-              <CardMedia
-                className={classes.media}
-                image={`/${indSpecies.ImageUrl}`}
-              />
-              <CardContent>
-                <Typography className={classes.text}>
-                  {indSpecies.name}
-                </Typography>
-                <Typography className={classes.text}>{`$${
-                  indSpecies.currentPrice
-                }`}</Typography>
-                <Typography className={classes.text}>
-                  {indSpecies.description}
-                </Typography>
-              </CardContent>
+      <Grid container justify="center" className={classes.mainGrid}>
+        <Grid item>
+          <Typography
+            variant="h4"
+            color="inherit"
+            className={classes.speciesText}
+          >
+            {indSpecies.name}
+          </Typography>
+        </Grid>
+        <Grid item className={classes.needPadding}>
+          <Card className={classes.card}>
+            <img src={`/${indSpecies.ImageUrl}`} />
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="h2">
+                {indSpecies.name}
+              </Typography>
+              <Typography gutterBottom variant="h5" component="h2">{`$${
+                indSpecies.currentPrice
+              }`}</Typography>
+              <Typography className={classes.text} component="p">
+                {indSpecies.description}
+              </Typography>
               <CardActions>
                 <Grid container spacing={0} justify="space-between">
                   <Grid item>
@@ -140,10 +144,10 @@ class SingleSpecies extends Component {
                   </Grid>
                 </Grid>
               </CardActions>
-            </Card>
-          </Grid>
+            </CardContent>
+          </Card>
         </Grid>
-      </div>
+      </Grid>
     )
   }
 }

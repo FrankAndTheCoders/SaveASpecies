@@ -51,10 +51,16 @@ class AllSpecies extends Component {
             ? this.props.species.map(indSpecies => (
                 <Grid item xs={3} key={indSpecies.id}>
                   <Card>
-                    <CardMedia
-                      className={classes.media}
-                      image={indSpecies.ImageUrl}
-                    />
+                    <Link
+                      to={`${indSpecies.category.toLowerCase()}/${
+                        indSpecies.id
+                      }`}
+                    >
+                      <CardMedia
+                        className={classes.media}
+                        image={indSpecies.ImageUrl}
+                      />{' '}
+                    </Link>
                     <CardContent>
                       <Typography className={classes.text}>
                         {indSpecies.name}
