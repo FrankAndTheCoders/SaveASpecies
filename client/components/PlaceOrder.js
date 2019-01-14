@@ -5,7 +5,6 @@ import ShoppingBasketOutlined from '@material-ui/icons/ShoppingBasketOutlined'
 class PlaceOrder extends React.Component {
   render() {
     const {cart} = this.props
-    console.log(`Order button rendered:\t${cart}`)
     return (
       <Fab variant="extended" color="primary" disabled={cart.length === 0}>
         <ShoppingBasketOutlined />
