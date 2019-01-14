@@ -4,6 +4,7 @@ import {NavLink} from 'react-router-dom'
 
 //  Save-A-Species Components
 import Routes from './routes'
+import CartItem from './components/CartItem'
 
 //  Material-UI Components
 import PropTypes from 'prop-types'
@@ -35,7 +36,7 @@ import Close from '@material-ui/icons/Close'
 import Home from '@material-ui/icons/Home'
 import ShoppingCart from '@material-ui/icons/ShoppingCart'
 
-const drawerWidth = 280
+const drawerWidth = 260
 
 const styles = theme => ({
   root: {
@@ -96,7 +97,8 @@ const styles = theme => ({
 
 class App extends React.Component {
   state = {
-    open: false
+    open: false,
+    cart: ['Alfa', 'Bravo', 'Charlee', 'Delta']
   }
 
   handleDrawerOpen = () => {
@@ -202,10 +204,8 @@ class App extends React.Component {
           </div>
           <Divider />
           <List>
-            {['Bird', 'Fish', 'Bear'].map((text, index) => (
-              <ListItem button key={text}>
-                <ListItemText primary={text} />
-              </ListItem>
+            {this.state.cart.map((text, index) => (
+              <CartItem animal={text} key={index} />
             ))}
           </List>
         </Drawer>
