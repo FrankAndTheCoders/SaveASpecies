@@ -8,7 +8,7 @@ import {NavLink, withRouter} from 'react-router-dom'
 import Routes from './routes'
 import CartItem from './components/CartItem'
 import PlaceOrder from './components/PlaceOrder'
-import {addToCart, removeFromCart} from '../store/cart'
+import {addToCart, removeFromCart} from './store/cart'
 
 //  Material-UI Components
 import PropTypes from 'prop-types'
@@ -101,8 +101,8 @@ const styles = theme => ({
 
 class App extends React.Component {
   state = {
-    open: true,
-    cart: ['Alfa', 'Bravo', 'Charlee', 'Delta']
+    open: true
+    // cart: ['Alfa', 'Bravo', 'Charlee', 'Delta']
   }
 
   handleDrawerOpen = () => {
@@ -128,12 +128,14 @@ class App extends React.Component {
   }
 
   render() {
-    const {classes, theme} = this.props
+    const {classes, cart} = this.props
     const {open} = this.state
     console.log('Props:')
     console.log(this.props)
     console.log('State:')
     console.log(this.state)
+    console.log('Global Cart')
+    console.log(cart)
 
     return (
       <div className={classes.root}>
@@ -226,7 +228,7 @@ class App extends React.Component {
           </div>
           <Divider />
           <List>
-            {this.state.cart.map((text, index) => (
+            {cart.map((text, index) => (
               <CartItem
                 animal={text}
                 key={index}
@@ -236,7 +238,7 @@ class App extends React.Component {
             ))}
           </List>
           <Divider />
-          <PlaceOrder cart={this.state.cart} />
+          <PlaceOrder cart={cart} />
         </Drawer>
       </div>
     )
