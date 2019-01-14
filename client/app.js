@@ -1,6 +1,7 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable no-unused-vars */
 import React from 'react'
+import {connect} from 'react-redux'
 import {NavLink} from 'react-router-dom'
 
 //  Save-A-Species Components
@@ -242,4 +243,10 @@ App.propTypes = {
   theme: PropTypes.object.isRequired
 }
 
-export default withStyles(styles, {withTheme: true})(App)
+const mapStateToProps = state => {}
+
+const mapDispatchToProps = dispatch => {}
+
+export default connect(mapStateToProps, mapDispatchToProps)(
+  withStyles(styles, {withTheme: true})(App)
+)
