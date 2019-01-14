@@ -19,6 +19,7 @@ import {
   FormControl
 } from '@material-ui/core'
 import PropTypes from 'prop-types'
+import {default as AddToCart} from './AddToCart'
 
 const styles = theme => ({
   card: {
@@ -63,9 +64,9 @@ class SingleSpecies extends Component {
   }
 
   componentDidMount() {
-    this.setState({
-      labelWidth: ReactDOM.findDOMNode(this.InputLabelRef).offsetWidth
-    })
+    // this.setState({
+    //   labelWidth: ReactDOM.findDOMNode(this.InputLabelRef).offsetWidth
+    // })
     const speciesId = this.props.match.params.speciesName
     this.props.fetchSingleSpecies(speciesId)
   }
@@ -100,47 +101,7 @@ class SingleSpecies extends Component {
               <CardActions>
                 <Grid container spacing={0} justify="space-between">
                   <Grid item>
-                    <FormControl
-                      variant="outlined"
-                      className={classes.formControl}
-                    >
-                      <InputLabel
-                        ref={ref => {
-                          this.InputLabelRef = ref
-                        }}
-                        htmlFor="outlined-quantity"
-                      >
-                        Quantity
-                      </InputLabel>
-                      <Select
-                        value={this.state.quantity}
-                        onChange={this.handleChange}
-                        input={
-                          <OutlinedInput
-                            labelWidth={this.state.labelWidth}
-                            name="quantity"
-                            id="outlined-quantity"
-                          />
-                        }
-                      >
-                        <MenuItem value={0}>0</MenuItem>
-                        <MenuItem value={1}>1</MenuItem>
-                        <MenuItem value={2}>2</MenuItem>
-                        <MenuItem value={3}>3</MenuItem>
-                        <MenuItem value={4}>4</MenuItem>
-                        <MenuItem value={5}>5</MenuItem>
-                        <MenuItem value={6}>6</MenuItem>
-                        <MenuItem value={7}>7</MenuItem>
-                        <MenuItem value={8}>8</MenuItem>
-                        <MenuItem value={9}>9</MenuItem>
-                        <MenuItem value={10}>10</MenuItem>
-                      </Select>
-                    </FormControl>
-                  </Grid>
-                  <Grid item>
-                    <Button variant="outlined" className={classes.button}>
-                      Add to Cart
-                    </Button>
+                    <AddToCart animal={indSpecies.name} />
                   </Grid>
                 </Grid>
               </CardActions>
