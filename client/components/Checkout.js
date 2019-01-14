@@ -60,7 +60,6 @@ class Checkout extends Component {
     const total = orderLines
       .filter(orderLine => orderLine.orderId === 1)
       .reduce((acc, cur) => {
-        console.log('ACC', acc)
         acc += cur.quantity * cur.price
         return acc
       }, 0)
