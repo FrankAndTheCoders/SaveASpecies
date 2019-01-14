@@ -42,8 +42,6 @@ class CartItem extends React.Component {
 
   render() {
     const {animal} = this.props
-    console.log('Cart Item animal')
-    console.log(animal)
     return (
       <ListItem button>
         <ListItemAvatar>
