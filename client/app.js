@@ -134,8 +134,6 @@ class App extends React.Component {
   render() {
     const {classes, cart} = this.props
     const {open} = this.state
-    console.log('The cart')
-    console.log(cart)
 
     return (
       <div className={classes.root}>
