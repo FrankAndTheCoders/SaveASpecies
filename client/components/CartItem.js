@@ -12,9 +12,9 @@ class CartItem extends React.Component {
     super(props)
     const {animal, index, remove} = props
     this.state = {
-      index,
-      animal,
-      remove,
+      // index,
+      // animal,
+      // remove,
       count: 1
     }
 
@@ -31,7 +31,7 @@ class CartItem extends React.Component {
   decreaseQuantity() {
     this.setState(prevState => {
       if (prevState.count === 1) {
-        prevState.remove(prevState.animal)
+        this.props.remove(this.props.animal)
         return
       }
 
@@ -51,7 +51,7 @@ class CartItem extends React.Component {
         <ListItemAvatar>
           <Avatar src="/panda-face-icon.png" />
         </ListItemAvatar>
-        <ListItemText primary={this.state.animal} />
+        <ListItemText primary={this.props.animal} />
         <Divider />
         <div>
           <ToolTip title="Less" aria-label="Less">
