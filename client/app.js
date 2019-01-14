@@ -98,7 +98,6 @@ const styles = theme => ({
 })
 
 class App extends React.Component {
-  ç
   state = {
     open: true,
     cart: ['Alfa', 'Bravo', 'Charlee', 'Delta']
@@ -228,11 +227,10 @@ class App extends React.Component {
                 index={index}
                 remove={this.removeFromCart}
               />
-              // <MediaCard animal={text} key={index} />
             ))}
           </List>
           <Divider />
-          <PlaceOrder />
+          <PlaceOrder cart={this.state.cart} />
         </Drawer>
       </div>
     )
