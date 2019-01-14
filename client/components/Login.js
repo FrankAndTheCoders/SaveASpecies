@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
+import {NavLink} from 'react-router-dom'
 import {auth} from '../store/user'
 import {
   InputLabel,
@@ -21,6 +22,7 @@ class Login extends Component {
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
+    this.handleSubmitSignUp = this.handleSubmitSignUp.bind(this)
   }
 
   componentDidMount() {}
@@ -28,6 +30,10 @@ class Login extends Component {
   handleSubmit(e) {
     e.preventDefault()
     this.props.auth(this.state.email, this.state.password, 'login')
+  }
+
+  handleSubmitSignUp() {
+    this.props.history.push('/signup')
   }
 
   handleChange(e) {
@@ -72,6 +78,7 @@ class Login extends Component {
               value={this.state.password}
             />
             <Button onClick={this.handleSubmit}>Log In</Button>
+            <Button onClick={this.handleSubmitSignUp}>Sign Up</Button>
           </FormGroup>
         </Grid>
       </div>
