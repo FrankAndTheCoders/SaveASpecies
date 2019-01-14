@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {getUser} from '../store'
+import {auth} from '../store/user'
 import {
   InputLabel,
   Input,
@@ -27,11 +27,7 @@ class Login extends Component {
 
   handleSubmit(e) {
     e.preventDefault()
-    this.props.getUser({
-      email: this.state.email,
-      password: this.state.password
-    })
-    this.props.history.push('/')
+    this.props.auth(this.state.email, this.state.password, 'login')
   }
 
   handleChange(e) {
@@ -66,14 +62,14 @@ class Login extends Component {
               name="email"
               type="text"
               onChange={this.handleChange}
-              value={this.state.emailInput}
+              value={this.state.email}
             />
             <TextField
               label="password"
               name="password"
               type="text"
               onChange={this.handleChange}
-              value={this.state.passwordInput}
+              value={this.state.password}
             />
             <Button onClick={this.handleSubmit}>Log In</Button>
           </FormGroup>
@@ -84,11 +80,11 @@ class Login extends Component {
 }
 
 const mapStateToProps = state => ({
-  user: state.user.user
+  user: state.user
 })
 
-// const mapDispatchToProps = (dispatch) => ({
-//   getUser: (user) => dispatch(getUser(user))
-// })
+const mapDispatchToProps = dispatch => ({
+  auth: (email, password, method) => dispatch(auth(email, password, method))
+})
 
-export default connect(mapStateToProps, null)(Login)
+export default connect(mapStateToProps, mapDispatchToProps)(Login)

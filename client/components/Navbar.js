@@ -15,9 +15,7 @@ import {Home, ShoppingCart, Menu} from '@material-ui/icons'
 class Navbar extends Component {
   constructor() {
     super()
-    this.state = {
-      login: false
-    }
+    this.state = {}
     this.handleLogout = this.handleLogout.bind(this)
   }
 
@@ -56,7 +54,6 @@ class Navbar extends Component {
           </Grid>
 
           <Grid container justify="flex-end" alignItems="center" spacing={16}>
-            {/* {this.props.user.id ? */}
             <Grid item>
               <NavLink to="/cart">
                 <IconButton color="inherit">
@@ -64,30 +61,30 @@ class Navbar extends Component {
                 </IconButton>
               </NavLink>
             </Grid>
+            {this.props.user.id ? (
+              <div>
+                <Grid item>
+                  <NavLink to="/user">
+                    <Button color="inherit">{this.props.user.firstName}</Button>
+                  </NavLink>
+                </Grid>
 
-            <Grid item>
-              <NavLink to="/user">
-                <Button color="inherit">Stuart</Button>
-              </NavLink>
-            </Grid>
-
-            <Grid item>
-              <NavLink to="/login">
-                <Button color="inherit" onClick={this.handleLogout}>
-                  Logout
-                </Button>
-              </NavLink>
-            </Grid>
-          </Grid>
-
-          {/* :
+                <Grid item>
+                  <NavLink to="/login">
+                    <Button color="inherit" onClick={this.handleLogout}>
+                      Logout
+                    </Button>
+                  </NavLink>
+                </Grid>
+              </div>
+            ) : (
               <Grid item>
                 <NavLink to="/login">
-                  <Button color="inherit">
-                    Login
-                  </Button>
+                  <Button color="inherit">Login</Button>
                 </NavLink>
-              </Grid> */}
+              </Grid>
+            )}
+          </Grid>
         </Toolbar>
       </AppBar>
     )
@@ -100,12 +97,12 @@ const mapState = state => {
   }
 }
 
-// const mapDispatch = dispatch => {
-//   return {
-//     handleClick() {
-//       dispatch(logout())
-//     }
-//   }
-// }
+const mapDispatch = dispatch => {
+  return {
+    handleClick() {
+      dispatch(logout())
+    }
+  }
+}
 
-export default connect(mapState, null)(Navbar)
+export default connect(mapState, mapDispatch)(Navbar)
