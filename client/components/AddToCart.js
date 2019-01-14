@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {withStyles} from '@material-ui/core'
 import Button from '@material-ui/core/Button'
+import {addToCart, removeFromCart} from '../store/cart'
 
 const styles = theme => ({
   text: {
@@ -22,19 +23,20 @@ const styles = theme => ({
 })
 
 class AddToCartButton extends React.Component {
-  state = {}
-
-  addToCart() {
-    console.log('Add to cart')
+  constructor() {
+    super()
   }
+
+  addToCart() {}
 
   render() {
     const {classes, animal} = this.props
+    // console.log(this.props)
     return (
       <Button
         variant="outlined"
         className={classes.button}
-        onClick={this.addToCart}
+        onClick={() => this.props.addItemToCart(animal)}
       >
         Add to Cart (Separate)
       </Button>
@@ -44,7 +46,9 @@ class AddToCartButton extends React.Component {
 
 const mapState = state => ({})
 
-const mapDispatch = dispatch => ({})
+const mapDispatch = dispatch => ({
+  addItemToCart: animal => dispatch(addToCart(animal))
+})
 
 AddToCartButton.propTypes = {
   classes: PropTypes.object.isRequired
