@@ -39,13 +39,9 @@ class CartItem extends React.Component {
     })
   }
 
-  componentDidUpdate() {
-    console.log(`Component for ${this.state.animal} was updated`)
-  }
+  componentDidUpdate() {}
 
   render() {
-    console.log('CartItem props')
-    console.log(this.props)
     return (
       <ListItem button>
         <ListItemAvatar>

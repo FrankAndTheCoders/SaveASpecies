@@ -86,17 +86,13 @@ class Cart extends React.Component {
 
   removeFromCart = index => {
     this.setState(prevState => {
-      console.log(index)
-      console.log(`The cart Before =\t${prevState.cart}`)
       const cart = prevState.cart.filter((item, i) => i !== index)
-      console.log(`The cart after =\t${cart}`)
+
       return {cart}
     })
   }
 
-  componentDidUpdate() {
-    console.log('Cart updated')
-  }
+  componentDidUpdate() {}
 
   render() {
     const {classes, theme} = this.props
