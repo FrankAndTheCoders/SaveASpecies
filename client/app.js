@@ -1,10 +1,14 @@
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable no-unused-vars */
 import React from 'react'
-import {NavLink} from 'react-router-dom'
+import {connect} from 'react-redux'
+import {NavLink, withRouter} from 'react-router-dom'
 
 //  Save-A-Species Components
 import Routes from './routes'
 import CartItem from './components/CartItem'
+import PlaceOrder from './components/PlaceOrder'
+import {addToCart, removeFromCart} from './store/cart'
 
 //  Material-UI Components
 import PropTypes from 'prop-types'
@@ -97,8 +101,7 @@ const styles = theme => ({
 
 class App extends React.Component {
   state = {
-    open: false,
-    cart: ['Alfa', 'Bravo', 'Charlee', 'Delta']
+    open: true
   }
 
   handleDrawerOpen = () => {
@@ -109,9 +112,32 @@ class App extends React.Component {
     this.setState({open: false})
   }
 
+  removeFromCart = animal => {
+    this.props.removeFromCart(animal)
+    // this.setState(prevState => ({open: prevState.open}))
+    // this.setState(prevState => ({cart: this.props.cart}))
+  }
+
+  componentDidMount() {
+    // this.setState(prevState => ({cart: this.props.cart}))
+    console.log('Mounted')
+    // console.log(this.state.cart)
+  }
+
+  componentDidUpdate(prevProps) {
+    console.log('Previous')
+    console.log(prevProps)
+    console.log('Updated')
+    console.log(this.props.cart)
+    console.log('State')
+    console.log(this.state)
+  }
+
   render() {
-    const {classes, theme} = this.props
+    const {classes, cart} = this.props
     const {open} = this.state
+    // console.log('Render/ Props:\t')
+    // console.log(this.props)
 
     return (
       <div className={classes.root}>
@@ -204,10 +230,17 @@ class App extends React.Component {
           </div>
           <Divider />
           <List>
-            {this.state.cart.map((text, index) => (
-              <CartItem animal={text} key={index} />
+            {cart.map((text, index) => (
+              <CartItem
+                animal={text}
+                key={index}
+                index={index}
+                remove={this.removeFromCart}
+              />
             ))}
           </List>
+          <Divider />
+          <PlaceOrder cart={cart} />
         </Drawer>
       </div>
     )
@@ -219,4 +252,15 @@ App.propTypes = {
   theme: PropTypes.object.isRequired
 }
 
-export default withStyles(styles, {withTheme: true})(App)
+const mapStateToProps = state => ({
+  cart: state.cart.cart,
+  order: state.cart.order
+})
+
+const mapDispatchToProps = {removeFromCart}
+
+const ConnectedApp = withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(App)
+)
+
+export default withStyles(styles, {withTheme: true})(ConnectedApp)
