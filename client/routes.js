@@ -7,7 +7,8 @@ import {
   SingleSpecies,
   SingleCategory,
   Login,
-  SignUp
+  SignUp,
+  Checkout
 } from './components'
 import {me} from './store'
 import {format} from 'url'
@@ -29,6 +30,7 @@ class Routes extends Component {
         <Route exact path="/" component={AllSpecies} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={SignUp} />
+        <Route exact path="/checkout" component={Checkout} />
         <Route exact path="/:animalGroup" component={SingleCategory} />
         <Route
           exact
