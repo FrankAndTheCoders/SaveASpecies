@@ -15,6 +15,7 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import {withStyles} from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
+import Badge from '@material-ui/core/Badge'
 import Button from '@material-ui/core/Button'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import Divider from '@material-ui/core/Divider'
@@ -60,6 +61,16 @@ const styles = theme => ({
     }),
     marginRight: drawerWidth
   },
+  badge: {
+    top: '50%',
+    right: -3,
+    // The border color match the background color.
+    border: `2px solid ${
+      theme.palette.type === 'light'
+        ? theme.palette.grey[200]
+        : theme.palette.grey[900]
+    }`
+  },
   menuButton: {
     marginLeft: 12,
     marginRight: 20
@@ -101,7 +112,7 @@ const styles = theme => ({
 
 class App extends React.Component {
   state = {
-    open: true
+    open: false
   }
 
   handleDrawerOpen = () => {
@@ -173,7 +184,14 @@ class App extends React.Component {
                     open && classes.hide
                   )}
                 >
-                  <ShoppingCart />
+                  <Badge
+                    badgeContent={cart.length}
+                    color="error"
+                    classes={{badge: classes.badge}}
+                    invisible={cart.length === 0}
+                  >
+                    <ShoppingCart />
+                  </Badge>
                 </IconButton>
               </Grid>
 
