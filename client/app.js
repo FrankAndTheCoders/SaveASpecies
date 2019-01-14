@@ -2,7 +2,7 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
 import {connect} from 'react-redux'
-import {NavLink} from 'react-router-dom'
+import {NavLink, withRouter} from 'react-router-dom'
 
 //  Save-A-Species Components
 import Routes from './routes'
@@ -129,6 +129,8 @@ class App extends React.Component {
   render() {
     const {classes, theme} = this.props
     const {open} = this.state
+    console.log(this.props)
+    console.log(this.state)
 
     return (
       <div className={classes.root}>
@@ -243,10 +245,12 @@ App.propTypes = {
   theme: PropTypes.object.isRequired
 }
 
-const mapStateToProps = state => {}
+const mapStateToProps = state => ({})
 
-const mapDispatchToProps = dispatch => {}
+const mapDispatchToProps = dispatch => ({})
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  withStyles(styles, {withTheme: true})(App)
+const ConnectedApp = withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(App)
 )
+
+export default withStyles(styles, {withTheme: true})(ConnectedApp)
