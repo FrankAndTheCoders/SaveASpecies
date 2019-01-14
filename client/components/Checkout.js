@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
+import {placeOrder} from '../store/checkout'
 import {
   Typography,
   List,
@@ -54,15 +55,39 @@ const styles = theme => ({
   }
 })
 
+const total = orderLines
+  .filter(orderLine => orderLine.orderId === 1)
+  .reduce((acc, cur) => {
+    acc += cur.quantity * cur.price
+    return acc
+  }, 0)
+
 class Checkout extends Component {
+  constructor() {
+    super()
+    this.state = {
+      totalAmount: total,
+      date: new Date()
+    }
+    this.handleClick = this.handleClick.bind(this)
+  }
+
+  handleClick() {
+    this.props.placeOrder(this.state.totalAmount, this.state.date)
+    this.setState({
+      totalAmount: '',
+      date: new Date()
+    })
+  }
+
   render() {
     const {classes} = this.props
-    const total = orderLines
-      .filter(orderLine => orderLine.orderId === 1)
-      .reduce((acc, cur) => {
-        acc += cur.quantity * cur.price
-        return acc
-      }, 0)
+    // const total = orderLines
+    //   .filter(orderLine => orderLine.orderId === 1)
+    //   .reduce((acc, cur) => {
+    //     acc += cur.quantity * cur.price
+    //     return acc
+    //   }, 0)
     return (
       <main className={classes.layout}>
         <Paper className={classes.paper}>
@@ -99,7 +124,11 @@ class Checkout extends Component {
             <Button variant="outlined" className={classes.button}>
               Back
             </Button>
-            <Button variant="outlined" className={classes.button}>
+            <Button
+              variant="outlined"
+              className={classes.button}
+              onClick={this.handleClick}
+            >
               Place Order
             </Button>
           </div>
@@ -113,4 +142,13 @@ Checkout.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
-export default withStyles(styles)(Checkout)
+// const mapState = state => ({
+
+// })
+
+const mapDispatch = dispatch => ({
+  placeOrder: (totalAmount, purchaseDate) =>
+    dispatch(placeOrder(totalAmount, purchaseDate))
+})
+
+export default connect(null, mapDispatch)(withStyles(styles)(Checkout))
