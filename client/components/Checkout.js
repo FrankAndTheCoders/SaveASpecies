@@ -8,16 +8,17 @@ import {
   Grid,
   Paper,
   Button,
+  Divider,
   withStyles
 } from '@material-ui/core'
 import PropTypes from 'prop-types'
 
 const orderLines = [
-  {speciesName: 'Leopard Shark', quantity: 3, price: 300000, orderId: 1},
-  {speciesName: 'Panda', quantity: 2, price: 1000, orderId: 1},
-  {speciesName: 'Manatee', quantity: 5, price: 1000, orderId: 1},
-  {speciesName: 'Eagle', quantity: 1, price: 1000, orderId: 2},
-  {speciesName: 'Woodpecker', quantity: 6, price: 1000, orderId: 2}
+  {id: 1, speciesName: 'Leopard Shark', quantity: 3, price: 300016, orderId: 1},
+  {id: 2, speciesName: 'Panda', quantity: 2, price: 1000, orderId: 1},
+  {id: 3, speciesName: 'Manatee', quantity: 5, price: 1000, orderId: 1},
+  {id: 4, speciesName: 'Eagle', quantity: 1, price: 1000, orderId: 2},
+  {id: 5, speciesName: 'Woodpecker', quantity: 6, price: 1000, orderId: 2}
 ]
 
 const styles = theme => ({
@@ -26,6 +27,10 @@ const styles = theme => ({
   },
   total: {
     fontWeight: '700'
+  },
+  buttons: {
+    display: 'flex',
+    justifyContent: 'space-between'
   },
   layout: {
     width: 'auto',
@@ -52,7 +57,13 @@ const styles = theme => ({
 class Checkout extends Component {
   render() {
     const {classes} = this.props
-
+    const total = orderLines
+      .filter(orderLine => orderLine.orderId === 1)
+      .reduce((acc, cur) => {
+        console.log('ACC', acc)
+        acc += cur.quantity * cur.price
+        return acc
+      }, 0)
     return (
       <main className={classes.layout}>
         <Paper className={classes.paper}>
@@ -62,11 +73,12 @@ class Checkout extends Component {
           <Typography variant="h6" gutterBottom>
             Order summary
           </Typography>
+          <Divider />
           <List disablePadding>
             {orderLines
               .filter(orderLine => orderLine.orderId === 1)
               .map(orderLine => (
-                <ListItem className={classes.listItem} key={orderLine.name}>
+                <ListItem className={classes.listItem} key={orderLine.id}>
                   <ListItemText
                     primary={orderLine.speciesName}
                     secondary={`Quantity ${orderLine.quantity}`}
@@ -76,14 +88,22 @@ class Checkout extends Component {
                   </Typography>
                 </ListItem>
               ))}
+            <Divider />
             <ListItem className={classes.listItem}>
               <ListItemText primary="Total" />
               <Typography variant="subtitle1" className={classes.total}>
-                $34.06
+                {`$${total / 100}`}
               </Typography>
             </ListItem>
           </List>
-          <Button variant="outlined">Place Order</Button>
+          <div className={classes.buttons}>
+            <Button variant="outlined" className={classes.button}>
+              Back
+            </Button>
+            <Button variant="outlined" className={classes.button}>
+              Place Order
+            </Button>
+          </div>
         </Paper>
       </main>
     )
