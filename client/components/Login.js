@@ -28,7 +28,6 @@ class Login extends Component {
   handleSubmit(e) {
     e.preventDefault()
     this.props.auth(this.state.email, this.state.password, 'login')
-    this.props.history.push('/')
   }
 
   handleChange(e) {
