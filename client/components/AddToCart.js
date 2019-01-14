@@ -38,7 +38,7 @@ class AddToCartButton extends React.Component {
         className={classes.button}
         onClick={() => this.props.addItemToCart(animal)}
       >
-        Add to Cart (Separate)
+        Add to Cart
       </Button>
     )
   }
