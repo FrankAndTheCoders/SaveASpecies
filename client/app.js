@@ -8,6 +8,7 @@ import {NavLink, withRouter} from 'react-router-dom'
 import Routes from './routes'
 import CartItem from './components/CartItem'
 import PlaceOrder from './components/PlaceOrder'
+import {addToCart, removeFromCart} from '../store/cart'
 
 //  Material-UI Components
 import PropTypes from 'prop-types'
@@ -129,7 +130,9 @@ class App extends React.Component {
   render() {
     const {classes, theme} = this.props
     const {open} = this.state
+    console.log('Props:')
     console.log(this.props)
+    console.log('State:')
     console.log(this.state)
 
     return (
@@ -245,7 +248,10 @@ App.propTypes = {
   theme: PropTypes.object.isRequired
 }
 
-const mapStateToProps = state => ({})
+const mapStateToProps = state => ({
+  cart: state.cart.cart,
+  order: state.cart.order
+})
 
 const mapDispatchToProps = dispatch => ({})
 

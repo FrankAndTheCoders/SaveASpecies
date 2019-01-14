@@ -1,8 +1,8 @@
 //  State
 const initialState = {
-  showCart: false,
-  cart: [],
-  order: []
+  // showCart: false,
+  cart: ['Yankee', 'Zulu'],
+  order: ['Order line1']
 }
 
 //  Action Types
