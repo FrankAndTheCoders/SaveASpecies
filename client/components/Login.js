@@ -27,11 +27,7 @@ class Login extends Component {
 
   handleSubmit(e) {
     e.preventDefault()
-    this.props.auth({
-      email: this.state.email,
-      password: this.state.password,
-      method: 'login'
-    })
+    this.props.auth(this.state.email, this.state.password, 'login')
     this.props.history.push('/')
   }
 
@@ -85,11 +81,11 @@ class Login extends Component {
 }
 
 const mapStateToProps = state => ({
-  user: state.user.user
+  user: state.user
 })
 
 const mapDispatchToProps = dispatch => ({
-  auth: user => dispatch(auth(user))
+  auth: (email, password, method) => dispatch(auth(email, password, method))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login)

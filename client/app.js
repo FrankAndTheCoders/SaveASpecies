@@ -9,6 +9,7 @@ import Routes from './routes'
 import CartItem from './components/CartItem'
 import PlaceOrder from './components/PlaceOrder'
 import {addToCart, removeFromCart} from './store/cart'
+import {logout} from './store/user'
 
 //  Material-UI Components
 import PropTypes from 'prop-types'
@@ -100,8 +101,16 @@ const styles = theme => ({
 })
 
 class App extends React.Component {
-  state = {
-    open: true
+  constructor() {
+    super()
+    this.state = {
+      open: false
+    }
+    this.handleLogout = this.handleLogout.bind(this)
+  }
+
+  handleLogout() {
+    this.props.logout()
   }
 
   handleDrawerOpen = () => {
@@ -120,17 +129,17 @@ class App extends React.Component {
 
   componentDidMount() {
     // this.setState(prevState => ({cart: this.props.cart}))
-    console.log('Mounted')
+    // console.log('Mounted')
     // console.log(this.state.cart)
   }
 
   componentDidUpdate(prevProps) {
-    console.log('Previous')
-    console.log(prevProps)
-    console.log('Updated')
-    console.log(this.props.cart)
-    console.log('State')
-    console.log(this.state)
+    // console.log('Previous')
+    // console.log(prevProps)
+    // console.log('Updated')
+    // console.log(this.props.cart)
+    // console.log('State')
+    // console.log(this.state)
   }
 
   render() {
@@ -149,33 +158,47 @@ class App extends React.Component {
           })}
         >
           <Toolbar disableGutters={!open}>
-            <Grid item>
-              <NavLink to="/">
-                <IconButton color="inherit">
-                  <Home />
-                </IconButton>
-              </NavLink>
+            <Grid
+              container
+              direction="row"
+              justify="flex-start"
+              alignItems="center"
+              spacing={0}
+            >
+              <Grid item>
+                <NavLink to="/">
+                  <IconButton color="inherit">
+                    <Home />
+                  </IconButton>
+                </NavLink>
+              </Grid>
+
+              <Grid item>
+                <NavLink to="/birds">
+                  <Button color="inherit">Birds</Button>
+                </NavLink>
+              </Grid>
+
+              <Grid item>
+                <NavLink to="/mammals">
+                  <Button color="inherit">Mammals</Button>
+                </NavLink>
+              </Grid>
+
+              <Grid item>
+                <NavLink to="/fish">
+                  <Button color="inherit">Fish</Button>
+                </NavLink>
+              </Grid>
             </Grid>
 
-            <Grid item>
-              <NavLink to="/birds">
-                <Button color="inherit">Birds</Button>
-              </NavLink>
-            </Grid>
-
-            <Grid item>
-              <NavLink to="/mammals">
-                <Button color="inherit">Mammals</Button>
-              </NavLink>
-            </Grid>
-
-            <Grid item>
-              <NavLink to="/fish">
-                <Button color="inherit">Fish</Button>
-              </NavLink>
-            </Grid>
-
-            <Grid container justify="flex-end" alignItems="center" spacing={16}>
+            <Grid
+              container
+              justify="flex-end"
+              alignItems="center"
+              spacing={0}
+              direction="row"
+            >
               <Grid item>
                 <IconButton
                   color="inherit"
@@ -190,19 +213,25 @@ class App extends React.Component {
                 </IconButton>
               </Grid>
 
-              <Grid item>
-                <NavLink to="/user">
-                  <Button color="inherit">Stuart</Button>
-                </NavLink>
-              </Grid>
+              {this.props.user.id ? (
+                <Grid item>
+                  <NavLink to="/user">
+                    <Button color="inherit">{this.props.user.firstName}</Button>
+                  </NavLink>
 
-              <Grid item>
-                <NavLink to="/login">
-                  <Button color="inherit" onClick={this.handleLogout}>
-                    Logout
-                  </Button>
-                </NavLink>
-              </Grid>
+                  <NavLink to="/login">
+                    <Button color="inherit" onClick={this.handleLogout}>
+                      Logout
+                    </Button>
+                  </NavLink>
+                </Grid>
+              ) : (
+                <Grid item>
+                  <NavLink to="/login">
+                    <Button color="inherit">Login</Button>
+                  </NavLink>
+                </Grid>
+              )}
             </Grid>
           </Toolbar>
         </AppBar>
@@ -254,10 +283,11 @@ App.propTypes = {
 
 const mapStateToProps = state => ({
   cart: state.cart.cart,
-  order: state.cart.order
+  order: state.cart.order,
+  user: state.user
 })
 
-const mapDispatchToProps = {removeFromCart}
+const mapDispatchToProps = {removeFromCart, logout}
 
 const ConnectedApp = withRouter(
   connect(mapStateToProps, mapDispatchToProps)(App)
