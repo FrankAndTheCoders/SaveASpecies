@@ -38,6 +38,7 @@ class AllSpecies extends Component {
 
   render() {
     const {classes} = this.props
+    // console.log(this.props.species)
     return (
       <div className="allSpecies">
         <Typography
@@ -73,12 +74,7 @@ class AllSpecies extends Component {
                     <CardActions>
                       <Grid container spacing={0} justify="space-between">
                         <Grid item>
-                          {/*
-                          <Button variant="outlined" className={classes.button}>
-                            Add to Cart
-                          </Button>
-                           */}
-                          <AddToCart animal={indSpecies.name} />
+                          <AddToCart animal={indSpecies} />
                         </Grid>
                         <Grid item>
                           <Link

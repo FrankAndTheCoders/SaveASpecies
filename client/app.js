@@ -123,30 +123,17 @@ class App extends React.Component {
 
   removeFromCart = animal => {
     this.props.removeFromCart(animal)
-    // this.setState(prevState => ({open: prevState.open}))
-    // this.setState(prevState => ({cart: this.props.cart}))
   }
 
-  componentDidMount() {
-    // this.setState(prevState => ({cart: this.props.cart}))
-    // console.log('Mounted')
-    // console.log(this.state.cart)
-  }
+  componentDidMount() {}
 
-  componentDidUpdate(prevProps) {
-    // console.log('Previous')
-    // console.log(prevProps)
-    // console.log('Updated')
-    // console.log(this.props.cart)
-    // console.log('State')
-    // console.log(this.state)
-  }
+  componentDidUpdate(prevProps) {}
 
   render() {
     const {classes, cart} = this.props
     const {open} = this.state
-    // console.log('Render/ Props:\t')
-    // console.log(this.props)
+    console.log('The cart')
+    console.log(cart)
 
     return (
       <div className={classes.root}>
@@ -259,11 +246,10 @@ class App extends React.Component {
           </div>
           <Divider />
           <List>
-            {cart.map((text, index) => (
+            {cart.map(animal => (
               <CartItem
-                animal={text}
-                key={index}
-                index={index}
+                animal={animal}
+                key={animal.id}
                 remove={this.removeFromCart}
               />
             ))}
