@@ -82,12 +82,12 @@ class Checkout extends Component {
 
   render() {
     const {classes} = this.props
-    // const total = orderLines
-    //   .filter(orderLine => orderLine.orderId === 1)
-    //   .reduce((acc, cur) => {
-    //     acc += cur.quantity * cur.price
-    //     return acc
-    //   }, 0)
+    const total = orderLines
+      .filter(orderLine => orderLine.orderId === 1)
+      .reduce((acc, cur) => {
+        acc += cur.quantity * cur.price
+        return acc
+      }, 0)
     return (
       <main className={classes.layout}>
         <Paper className={classes.paper}>

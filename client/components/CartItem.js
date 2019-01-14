@@ -10,11 +10,8 @@ import ToolTip from '@material-ui/core/Tooltip'
 class CartItem extends React.Component {
   constructor(props) {
     super(props)
-    const {animal, index, remove} = props
+    // const {animal, index, remove} = props
     this.state = {
-      // index,
-      // animal,
-      // remove,
       count: 1
     }
 
@@ -23,12 +20,14 @@ class CartItem extends React.Component {
   }
 
   increaseQuantity() {
+    this.props.animal.quantity++
     this.setState(prevState => {
       return {count: prevState.count + 1}
     })
   }
 
   decreaseQuantity() {
+    this.props.animal.quantity--
     this.setState(prevState => {
       if (prevState.count === 1) {
         this.props.remove(this.props.animal)
@@ -39,19 +38,18 @@ class CartItem extends React.Component {
     })
   }
 
-  componentDidUpdate() {
-    console.log(`Component for ${this.state.animal} was updated`)
-  }
+  componentDidUpdate() {}
 
   render() {
-    console.log('CartItem props')
-    console.log(this.props)
+    const {animal} = this.props
+    console.log('Cart Item animal')
+    console.log(animal)
     return (
       <ListItem button>
         <ListItemAvatar>
           <Avatar src="/panda-face-icon.png" />
         </ListItemAvatar>
-        <ListItemText primary={this.props.animal} />
+        <ListItemText primary={animal.name} />
         <Divider />
         <div>
           <ToolTip title="Less" aria-label="Less">
@@ -64,7 +62,7 @@ class CartItem extends React.Component {
               -
             </Button>
           </ToolTip>
-          <div className="quantity">{this.state.count}</div>
+          <div className="quantity">{animal.quantity}</div>
           <ToolTip title="More" aria-label="More">
             <Button
               variant="contained"

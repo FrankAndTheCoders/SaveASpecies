@@ -23,15 +23,8 @@ const styles = theme => ({
 })
 
 class AddToCartButton extends React.Component {
-  constructor() {
-    super()
-  }
-
-  addToCart() {}
-
   render() {
-    const {classes, animal, animalId} = this.props
-    console.log(this.props)
+    const {classes, animal} = this.props
     return (
       <Button
         variant="outlined"
