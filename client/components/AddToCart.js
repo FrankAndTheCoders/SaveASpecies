@@ -30,8 +30,8 @@ class AddToCartButton extends React.Component {
   addToCart() {}
 
   render() {
-    const {classes, animal} = this.props
-    // console.log(this.props)
+    const {classes, animal, animalId} = this.props
+    console.log(this.props)
     return (
       <Button
         variant="outlined"

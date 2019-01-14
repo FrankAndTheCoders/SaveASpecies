@@ -31,7 +31,7 @@ class CartItem extends React.Component {
   decreaseQuantity() {
     this.setState(prevState => {
       if (prevState.count === 1) {
-        prevState.remove(prevState.index)
+        prevState.remove(prevState.animal)
         return
       }
 
@@ -39,7 +39,13 @@ class CartItem extends React.Component {
     })
   }
 
+  componentDidUpdate() {
+    console.log(`Component for ${this.state.animal} was updated`)
+  }
+
   render() {
+    console.log('CartItem props')
+    console.log(this.props)
     return (
       <ListItem button>
         <ListItemAvatar>

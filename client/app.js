@@ -102,7 +102,6 @@ const styles = theme => ({
 class App extends React.Component {
   state = {
     open: true
-    // cart: ['Alfa', 'Bravo', 'Charlee', 'Delta']
   }
 
   handleDrawerOpen = () => {
@@ -113,29 +112,32 @@ class App extends React.Component {
     this.setState({open: false})
   }
 
-  removeFromCart = index => {
-    this.setState(prevState => {
-      console.log(index)
-      console.log(`The cart Before =\t${prevState.cart}`)
-      const cart = prevState.cart.filter((item, i) => i !== index)
-      console.log(`The cart after =\t${cart}`)
-      return {cart}
-    })
+  removeFromCart = animal => {
+    this.props.removeFromCart(animal)
+    // this.setState(prevState => ({open: prevState.open}))
+    // this.setState(prevState => ({cart: this.props.cart}))
   }
 
-  componentDidUpdate() {
+  componentDidMount() {
+    // this.setState(prevState => ({cart: this.props.cart}))
+    console.log('Mounted')
+    // console.log(this.state.cart)
+  }
+
+  componentDidUpdate(prevProps) {
+    console.log('Previous')
+    console.log(prevProps)
     console.log('Updated')
+    console.log(this.props.cart)
+    console.log('State')
+    console.log(this.state)
   }
 
   render() {
     const {classes, cart} = this.props
     const {open} = this.state
-    console.log('Props:')
-    console.log(this.props)
-    console.log('State:')
-    console.log(this.state)
-    console.log('Global Cart')
-    console.log(cart)
+    // console.log('Render/ Props:\t')
+    // console.log(this.props)
 
     return (
       <div className={classes.root}>
@@ -255,7 +257,7 @@ const mapStateToProps = state => ({
   order: state.cart.order
 })
 
-const mapDispatchToProps = dispatch => ({})
+const mapDispatchToProps = {removeFromCart}
 
 const ConnectedApp = withRouter(
   connect(mapStateToProps, mapDispatchToProps)(App)
