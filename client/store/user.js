@@ -38,7 +38,7 @@ export const auth = (email, password, method) => async dispatch => {
       console.log('returned axios', res.data)
     )
   } catch (authError) {
-    console.log('error!!!!')
+    console.log(authError)
     return dispatch(getUser({error: authError}))
   }
 
