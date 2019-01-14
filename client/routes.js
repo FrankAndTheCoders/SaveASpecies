@@ -8,7 +8,8 @@ import {
   SingleCategory,
   Login,
   SignUp,
-  Checkout
+  Checkout,
+  UserPage
 } from './components'
 import {me} from './store'
 import {format} from 'url'
@@ -31,6 +32,7 @@ class Routes extends Component {
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={SignUp} />
         <Route exact path="/checkout" component={Checkout} />
+        <Route exact path="/user" component={UserPage} />
         <Route exact path="/:animalGroup" component={SingleCategory} />
         <Route
           exact

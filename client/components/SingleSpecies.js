@@ -101,7 +101,7 @@ class SingleSpecies extends Component {
               <CardActions>
                 <Grid container spacing={0} justify="space-between">
                   <Grid item>
-                    <AddToCart animal={indSpecies.name} />
+                    <AddToCart animal={indSpecies} />
                   </Grid>
                 </Grid>
               </CardActions>

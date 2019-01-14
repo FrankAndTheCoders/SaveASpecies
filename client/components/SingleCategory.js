@@ -13,6 +13,7 @@ import {
   withStyles
 } from '@material-ui/core'
 import PropTypes from 'prop-types'
+import {default as AddToCart} from './AddToCart'
 
 const styles = theme => ({
   text: {
@@ -66,9 +67,7 @@ class SingleCategory extends Component {
                 <CardActions>
                   <Grid container spacing={0} justify="space-between">
                     <Grid item>
-                      <Button variant="outlined" className={classes.button}>
-                        Add to Cart
-                      </Button>
+                      <AddToCart animal={group} />
                     </Grid>
                     <Grid item>
                       <Link to={`${animalGroup}/${group.id}`}>
