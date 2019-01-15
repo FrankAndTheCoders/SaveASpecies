@@ -142,8 +142,7 @@ class App extends React.Component {
 
   render() {
     const {classes, cart} = this.props
-    const {open} = this.state
-
+        const {open} = this.state	
     return (
       <div className={classes.root}>
         <CssBaseline />
@@ -199,6 +198,7 @@ class App extends React.Component {
                 <IconButton
                   color="inherit"
                   aria-label="Open drawer"
+                  disabled={this.props.location.pathname === '/checkout'}
                   onClick={this.handleDrawerOpen}
                   className={classNames(
                     classes.menuButton,
@@ -211,7 +211,7 @@ class App extends React.Component {
                     classes={{badge: classes.badge}}
                     invisible={cart.length === 0}
                   >
-                    <ShoppingCart />
+                    <ShoppingCart  />
                   </Badge>
                 </IconButton>
               </Grid>
@@ -244,7 +244,7 @@ class App extends React.Component {
           })}
         >
           <div className={classes.drawerHeader} />
-          <Routes />
+          <Routes  />
         </main>
         <Drawer
           className={classes.drawer}
@@ -271,7 +271,7 @@ class App extends React.Component {
             ))}
           </List>
           <Divider />
-          <PlaceOrder cart={cart} />
+          <PlaceOrder cart={cart} closeCart={this.handleDrawerClose} />
         </Drawer>
       </div>
     )

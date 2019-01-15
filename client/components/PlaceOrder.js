@@ -5,17 +5,32 @@ import Fab from '@material-ui/core/Fab'
 import ShoppingBasketOutlined from '@material-ui/icons/ShoppingBasketOutlined'
 
 class PlaceOrder extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.handleClick = this.handleClick.bind(this)
+  }
+
+  handleClick() {
+    this.props.history.push('/checkout')
+    this.props.closeCart()
+  }
+
   render() {
     const {cart} = this.props
     return (
-      <Link to="/checkout">
-        <Fab variant="extended" color="primary" disabled={cart.length === 0}>
-          <ShoppingBasketOutlined />
-          Checkout
-        </Fab>
-      </Link>
+      <Fab
+        variant="extended"
+        color="primary"
+        disabled={cart.length === 0}
+        onClick={() => this.handleClick()}
+      >
+        <ShoppingBasketOutlined />
+        Checkout
+      </Fab>
     )
   }
 }
 
-export default PlaceOrder
+
+export default withRouter(PlaceOrder)
