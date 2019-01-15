@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {placeOrder} from '../store/checkout'
+import {placeOrder} from '../store/cart'
 import {
   Typography,
   List,
@@ -13,14 +13,6 @@ import {
   withStyles
 } from '@material-ui/core'
 import PropTypes from 'prop-types'
-
-const orderLines = [
-  {id: 1, speciesName: 'Leopard Shark', quantity: 3, price: 300016, orderId: 1},
-  {id: 2, speciesName: 'Panda', quantity: 2, price: 1000, orderId: 1},
-  {id: 3, speciesName: 'Manatee', quantity: 5, price: 1000, orderId: 1},
-  {id: 4, speciesName: 'Eagle', quantity: 1, price: 1000, orderId: 2},
-  {id: 5, speciesName: 'Woodpecker', quantity: 6, price: 1000, orderId: 2}
-]
 
 const styles = theme => ({
   listItem: {
@@ -55,21 +47,24 @@ const styles = theme => ({
   }
 })
 
-const total = orderLines
-  .filter(orderLine => orderLine.orderId === 1)
-  .reduce((acc, cur) => {
-    acc += cur.quantity * cur.price
-    return acc
-  }, 0)
-
 class Checkout extends Component {
   constructor() {
     super()
     this.state = {
-      totalAmount: total,
+      totalAmount: '',
       date: new Date()
     }
     this.handleClick = this.handleClick.bind(this)
+  }
+
+  componentDidMount() {
+    const total = this.props.orderLines.reduce((acc, cur) => {
+      acc += cur.quantity * cur.currentPrice
+      return acc
+    }, 0)
+    this.setState({
+      totalAmount: total
+    })
   }
 
   handleClick() {
@@ -82,12 +77,7 @@ class Checkout extends Component {
 
   render() {
     const {classes} = this.props
-    // const total = orderLines
-    //   .filter(orderLine => orderLine.orderId === 1)
-    //   .reduce((acc, cur) => {
-    //     acc += cur.quantity * cur.price
-    //     return acc
-    //   }, 0)
+    const orderLines = this.props.orderLines
     return (
       <main className={classes.layout}>
         <Paper className={classes.paper}>
@@ -99,24 +89,22 @@ class Checkout extends Component {
           </Typography>
           <Divider />
           <List disablePadding>
-            {orderLines
-              .filter(orderLine => orderLine.orderId === 1)
-              .map(orderLine => (
-                <ListItem className={classes.listItem} key={orderLine.id}>
-                  <ListItemText
-                    primary={orderLine.speciesName}
-                    secondary={`Quantity ${orderLine.quantity}`}
-                  />
-                  <Typography variant="body2">
-                    {`$${orderLine.price / 100}`}
-                  </Typography>
-                </ListItem>
-              ))}
+            {orderLines.map(orderLine => (
+              <ListItem className={classes.listItem} key={orderLine.id}>
+                <ListItemText
+                  primary={orderLine.name}
+                  secondary={`Quantity ${orderLine.quantity}`}
+                />
+                <Typography variant="body2">
+                  {`$${orderLine.currentPrice / 100}`}
+                </Typography>
+              </ListItem>
+            ))}
             <Divider />
             <ListItem className={classes.listItem}>
               <ListItemText primary="Total" />
               <Typography variant="subtitle1" className={classes.total}>
-                {`$${total / 100}`}
+                {`$${this.state.totalAmount / 100}`}
               </Typography>
             </ListItem>
           </List>
@@ -142,13 +130,13 @@ Checkout.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
-// const mapState = state => ({
-
-// })
+const mapState = state => ({
+  orderLines: state.cart.cart
+})
 
 const mapDispatch = dispatch => ({
   placeOrder: (totalAmount, purchaseDate) =>
     dispatch(placeOrder(totalAmount, purchaseDate))
 })
 
-export default connect(null, mapDispatch)(withStyles(styles)(Checkout))
+export default connect(mapState, mapDispatch)(withStyles(styles)(Checkout))
