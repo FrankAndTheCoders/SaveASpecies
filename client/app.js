@@ -142,7 +142,7 @@ class App extends React.Component {
 
   render() {
     const {classes, cart} = this.props
-        const {open} = this.state	
+    const {open} = this.state
     return (
       <div className={classes.root}>
         <CssBaseline />
@@ -209,9 +209,12 @@ class App extends React.Component {
                     badgeContent={cart.length}
                     color="error"
                     classes={{badge: classes.badge}}
-                    invisible={cart.length === 0}
+                    invisible={
+                      cart.length === 0 ||
+                      this.props.location.pathname === '/checkout'
+                    }
                   >
-                    <ShoppingCart  />
+                    <ShoppingCart />
                   </Badge>
                 </IconButton>
               </Grid>
@@ -244,7 +247,7 @@ class App extends React.Component {
           })}
         >
           <div className={classes.drawerHeader} />
-          <Routes  />
+          <Routes />
         </main>
         <Drawer
           className={classes.drawer}

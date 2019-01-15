@@ -27,3 +27,9 @@ form div {
 .quantity {
   text-align: center;
 }
+
+.loginButtons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
