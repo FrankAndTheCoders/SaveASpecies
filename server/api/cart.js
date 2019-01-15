@@ -30,6 +30,17 @@ router.post('/orderline', async (req, res, next) => {
   }
 })
 
+router.get('/order/:userId', async (req, res, next) => {
+  try {
+    const {userId} = req.params
+
+    const orders = await Order.findAll({where: {userId}})
+    res.json(orders)
+  } catch (err) {
+    next(err)
+  }
+})
+
 router.post('/order', async (req, res, next) => {
   try {
     const [numberOfAffectedRows, affectedRows] = await Order.update(
