@@ -13,8 +13,11 @@ const PLACE_ORDER = 'PLACE_ORDER'
 
 //  Action Creators
 const loadCart = () => ({type: LOAD_CART})
-// export const addToCart = animal => ({type: ADD_TO_CART, animal})
-export const addToCart = animal => ({type: ADD_TO_CART, animal})
+
+export const addToCart = animal => {
+  return {type: ADD_TO_CART, animal}
+}
+
 export const removeFromCart = animal => ({
   type: REMOVE_FROM_CART,
   animal
@@ -42,6 +45,15 @@ export const placeOrder = (totalAmount, purchaseDate) => async dispatch => {
 export default function(state = initialState, action) {
   switch (action.type) {
     case ADD_TO_CART:
+      window.localStorage.setItem(
+        'cart',
+        JSON.stringify({
+          ...state,
+          cart: state.cart.map(anml => anml.name).includes(action.animal.name)
+            ? state.cart
+            : state.cart.concat([{...action.animal, quantity: 1}])
+        })
+      )
       return {
         ...state,
         cart: state.cart.map(anml => anml.name).includes(action.animal.name)
@@ -49,10 +61,29 @@ export default function(state = initialState, action) {
           : state.cart.concat([{...action.animal, quantity: 1}])
       }
     case REMOVE_FROM_CART:
+      window.localStorage.setItem(
+        'cart',
+        JSON.stringify({
+          ...state,
+          cart: state.cart.filter(elem => elem !== action.animal)
+        })
+      )
       return {...state, cart: state.cart.filter(elem => elem !== action.animal)}
     case PLACE_ORDER:
+      window.localStorage.clear()
       return {...state, cart: []}
     default:
       return state
   }
 }
+
+// function editLocalStorage(animal) {
+//   if (window.localStorage.getItem('cart')) {
+//     let originalCart = JSON.parse(window.localStorage.getItem('cart'))
+//     originalCart.push(animal)
+//     window.localStorage.setItem('cart', JSON.stringify(originalCart));
+//     console.log(window.localStorage.getItem('cart'))
+//   } else {
+//     window.localStorage.setItem('cart', JSON.stringify([animal]));
+//   }
+// }
