@@ -211,7 +211,7 @@ class App extends React.Component {
                     classes={{badge: classes.badge}}
                     invisible={cart.length === 0}
                   >
-                    <ShoppingCart invisible="false" />
+                    <ShoppingCart  />
                   </Badge>
                 </IconButton>
               </Grid>
