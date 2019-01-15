@@ -73,7 +73,7 @@ class Login extends Component {
             <TextField
               label="password"
               name="password"
-              type="text"
+              type="password"
               onChange={this.handleChange}
               value={this.state.password}
             />
