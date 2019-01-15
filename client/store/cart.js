@@ -1,9 +1,9 @@
 import axios from 'axios'
 
 //  State
-const initialState = {
-  cart: []
-}
+const initialState = window.localStorage.cart
+  ? {cart: JSON.parse(window.localStorage.getItem('cart')).cart}
+  : {cart: []}
 
 //  Action Types
 const LOAD_CART = 'LOAD_CART'
