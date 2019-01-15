@@ -244,7 +244,7 @@ class App extends React.Component {
           })}
         >
           <div className={classes.drawerHeader} />
-          <Routes closeCheckout={this.handleDrawerClose} />
+          <Routes  />
         </main>
         <Drawer
           className={classes.drawer}
