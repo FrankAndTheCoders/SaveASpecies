@@ -9,7 +9,7 @@ import {
   Login,
   SignUp,
   Checkout,
-  UserPage
+  UserHome
 } from './components'
 import {me} from './store'
 import {format} from 'url'
@@ -27,6 +27,13 @@ class Routes extends Component {
 
     return (
       <Switch>
+        {isLoggedIn && (
+          <Switch>
+            <Route exact path="/user" component={UserHome} />
+            {/* Routes placed here are only available after logging in */}
+            {/* <Route path="/home" component={UserHome} /> */}
+          </Switch>
+        )}
         {/* Routes placed here are available to all visitors */}
         <Route exact path="/" component={AllSpecies} />
         <Route exact path="/login" component={Login} />
@@ -38,13 +45,6 @@ class Routes extends Component {
           path="/:animalGroup/:speciesName"
           component={SingleSpecies}
         />
-        {isLoggedIn && (
-          <Switch>
-            <Route exact path="/user" component={UserPage} />
-            {/* Routes placed here are only available after logging in */}
-            {/* <Route path="/home" component={UserHome} /> */}
-          </Switch>
-        )}
         {/* Displays our Login component as a fallback */}
         {/* <Route component={AuthForm} /> */}
       </Switch>
