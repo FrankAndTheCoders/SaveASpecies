@@ -136,13 +136,25 @@ class App extends React.Component {
     this.props.removeFromCart(animal)
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    // if (this.props.location.pathname === '/checkout' && this.state.open) {
+    //   console.log('CLose it2')
+    //   // this.handleDrawerClose()
+    //   // showCartIcon = true
+    // } else {
+    //   console.log('Leave it alone2')
+    //   // showCartIcon = false
+    // }
+  }
 
   componentDidUpdate(prevProps) {}
 
   render() {
     const {classes, cart} = this.props
     const {open} = this.state
+    // console.log('App')
+    // console.log(this.props)
+    // let showCartIcon = false?
 
     return (
       <div className={classes.root}>
@@ -199,6 +211,7 @@ class App extends React.Component {
                 <IconButton
                   color="inherit"
                   aria-label="Open drawer"
+                  disabled={this.props.location.pathname === '/checkout'}
                   onClick={this.handleDrawerOpen}
                   className={classNames(
                     classes.menuButton,
@@ -211,7 +224,7 @@ class App extends React.Component {
                     classes={{badge: classes.badge}}
                     invisible={cart.length === 0}
                   >
-                    <ShoppingCart />
+                    <ShoppingCart invisible="false" />
                   </Badge>
                 </IconButton>
               </Grid>
@@ -244,7 +257,7 @@ class App extends React.Component {
           })}
         >
           <div className={classes.drawerHeader} />
-          <Routes />
+          <Routes closeCheckout={this.handleDrawerClose} />
         </main>
         <Drawer
           className={classes.drawer}

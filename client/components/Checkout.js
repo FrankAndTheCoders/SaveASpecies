@@ -80,6 +80,7 @@ class Checkout extends Component {
   render() {
     const {classes} = this.props
     const orderLines = this.props.orderLines
+
     return (
       <main className={classes.layout}>
         <Paper className={classes.paper}>

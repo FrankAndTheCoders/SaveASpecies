@@ -16,8 +16,6 @@ class PlaceOrder extends React.Component {
   }
   render() {
     const {cart} = this.props
-    console.log('Handle Click2:')
-    console.log(this.props)
     return (
       <Fab
         variant="extended"
