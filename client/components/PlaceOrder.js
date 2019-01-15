@@ -11,9 +11,12 @@ class PlaceOrder extends React.Component {
 
     this.handleClick = this.handleClick.bind(this)
   }
+
   handleClick() {
     this.props.history.push('/checkout')
+    this.props.closeCart()
   }
+
   render() {
     const {cart} = this.props
     return (

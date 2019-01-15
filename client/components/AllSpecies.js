@@ -38,7 +38,7 @@ class AllSpecies extends Component {
 
   render() {
     const {classes} = this.props
-    // console.log(this.props.species)
+
     return (
       <div className="allSpecies">
         <Typography

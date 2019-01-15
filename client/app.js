@@ -136,25 +136,12 @@ class App extends React.Component {
     this.props.removeFromCart(animal)
   }
 
-  componentDidMount() {
-    // if (this.props.location.pathname === '/checkout' && this.state.open) {
-    //   console.log('CLose it2')
-    //   // this.handleDrawerClose()
-    //   // showCartIcon = true
-    // } else {
-    //   console.log('Leave it alone2')
-    //   // showCartIcon = false
-    // }
-  }
+  componentDidMount() {}
 
   componentDidUpdate(prevProps) {}
 
   render() {
     const {classes, cart} = this.props
-    const {open} = this.state
-    // console.log('App')
-    // console.log(this.props)
-    // let showCartIcon = false?
 
     return (
       <div className={classes.root}>
@@ -284,7 +271,7 @@ class App extends React.Component {
             ))}
           </List>
           <Divider />
-          <PlaceOrder cart={cart} />
+          <PlaceOrder cart={cart} closeCart={this.handleDrawerClose} />
         </Drawer>
       </div>
     )
