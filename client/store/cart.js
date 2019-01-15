@@ -3,7 +3,6 @@ import axios from 'axios'
 //  State
 const initialState = {
   cart: []
-  //order: []
 }
 
 //  Action Types

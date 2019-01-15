@@ -68,11 +68,13 @@ class Checkout extends Component {
   }
 
   handleClick() {
-    this.props.placeOrder(this.state.totalAmount, this.state.date)
-    this.setState({
-      totalAmount: '',
-      date: new Date()
-    })
+    if (this.state.totalAmount !== '') {
+      this.props.placeOrder(this.state.totalAmount, this.state.date)
+      this.setState({
+        totalAmount: '',
+        date: new Date()
+      })
+    }
   }
 
   render() {
@@ -109,7 +111,11 @@ class Checkout extends Component {
             </ListItem>
           </List>
           <div className={classes.buttons}>
-            <Button variant="outlined" className={classes.button}>
+            <Button
+              variant="outlined"
+              className={classes.button}
+              onClick={() => this.props.history.push('/')}
+            >
               Back
             </Button>
             <Button
