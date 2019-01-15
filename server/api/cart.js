@@ -31,13 +31,17 @@ router.post('/orderline', async (req, res, next) => {
 })
 
 router.get('/order/:userId', async (req, res, next) => {
-  try {
-    const {userId} = req.params
+  if (req.user && req.params.userId === '' + req.user.id) {
+    try {
+      const {userId} = req.params
 
-    const orders = await Order.findAll({where: {userId}})
-    res.json(orders)
-  } catch (err) {
-    next(err)
+      const orders = await Order.findAll({where: {userId}})
+      res.json(orders)
+    } catch (err) {
+      next(err)
+    }
+  } else {
+    res.status(403).send('Forbidden')
   }
 })
 
