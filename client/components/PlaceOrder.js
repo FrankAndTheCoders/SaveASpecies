@@ -33,6 +33,5 @@ class PlaceOrder extends React.Component {
   }
 }
 
-// const mapStateToProps = state => ({})
 
 export default withRouter(PlaceOrder)
