@@ -7,6 +7,19 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar'
 import ListItemText from '@material-ui/core/ListItemText'
 import ToolTip from '@material-ui/core/Tooltip'
 
+// function updateLocalStorage(animal, count) {
+//   console.log(JSON.parse(window.localStorage.getItem('cart')))
+//     let updatedCart = JSON.parse(window.localStorage.getItem('cart')).cart.map(cartAnimal => {
+//       console.log('mapping')
+//       if (animal === cartAnimal) {
+//         animal.quantity = count
+//       }
+//       return cartAnimal
+//     })
+//     window.localStorage.setItem('cart', JSON.stringify(updatedCart));
+//     console.log(window.localStorage.getItem('cart'))
+// }
+
 class CartItem extends React.Component {
   constructor(props) {
     super(props)
@@ -17,6 +30,7 @@ class CartItem extends React.Component {
 
     this.increaseQuantity = this.increaseQuantity.bind(this)
     this.decreaseQuantity = this.decreaseQuantity.bind(this)
+    this.updateLocalStorage = this.updateLocalStorage.bind(this)
   }
 
   increaseQuantity() {
@@ -24,6 +38,20 @@ class CartItem extends React.Component {
     this.setState(prevState => {
       return {count: prevState.count + 1}
     })
+
+    this.updateLocalStorage(this.props.animal, this.props.animal.quantity)
+  }
+
+  updateLocalStorage(animal, count) {
+    let updatedCart = JSON.parse(window.localStorage.getItem('cart')).cart.map(
+      cartAnimal => {
+        if (animal.id === cartAnimal.id) {
+          cartAnimal.quantity = count
+        }
+        return cartAnimal
+      }
+    )
+    window.localStorage.setItem('cart', JSON.stringify({cart: updatedCart}))
   }
 
   decreaseQuantity() {

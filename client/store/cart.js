@@ -45,21 +45,16 @@ export const placeOrder = (totalAmount, purchaseDate) => async dispatch => {
 export default function(state = initialState, action) {
   switch (action.type) {
     case ADD_TO_CART:
-      window.localStorage.setItem(
-        'cart',
-        JSON.stringify({
-          ...state,
-          cart: state.cart.map(anml => anml.name).includes(action.animal.name)
-            ? state.cart
-            : state.cart.concat([{...action.animal, quantity: 1}])
-        })
-      )
-      return {
+      let returnState = {
         ...state,
         cart: state.cart.map(anml => anml.name).includes(action.animal.name)
           ? state.cart
           : state.cart.concat([{...action.animal, quantity: 1}])
       }
+
+      window.localStorage.setItem('cart', JSON.stringify(returnState))
+
+      return returnState
     case REMOVE_FROM_CART:
       window.localStorage.setItem(
         'cart',

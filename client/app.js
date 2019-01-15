@@ -205,6 +205,7 @@ class App extends React.Component {
                     open && classes.hide
                   )}
                 >
+                  {console.log(cart)}
                   <Badge
                     badgeContent={cart.length}
                     color="error"
