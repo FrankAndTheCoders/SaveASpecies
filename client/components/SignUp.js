@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {createUser} from '../store'
+import {createUser} from '../store/user'
 import {
   InputLabel,
   Input,
@@ -34,6 +34,7 @@ class SignUp extends Component {
       firstName: this.state.firstName,
       lastName: this.state.lastName,
       email: this.state.email,
+      role: 'user',
       password: this.state.password
     })
     this.props.history.push('/')
@@ -102,7 +103,7 @@ class SignUp extends Component {
               value={this.state.confirmPassword}
             />
             <Button color="secondary" onClick={this.handleSubmit}>
-              Sign Up
+              Submit
             </Button>
             <Button color="secondary" href="/auth/google">
               Sign Up With Google
@@ -114,8 +115,8 @@ class SignUp extends Component {
   }
 }
 
-// const mapDispatchToProps = (dispatch) => ({
-//   createUser: (user) => dispatch(createUser(user))
-// })
+const mapDispatchToProps = dispatch => ({
+  createUser: user => dispatch(createUser(user))
+})
 
-export default connect(null, null)(SignUp)
+export default connect(null, mapDispatchToProps)(SignUp)
