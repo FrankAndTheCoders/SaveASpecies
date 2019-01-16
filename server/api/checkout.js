@@ -1,13 +1,27 @@
 const router = require('express').Router()
-const {Order} = require('../db/models')
+const {Order, OrderLine} = require('../db/models')
 
 router.post('/', async (req, res, next) => {
   try {
+    const total = Number(req.body.totalAmount.totalAmount)
+
     const order = await Order.create({
-      totalAmount: req.body.totalAmount,
-      purchaseDate: req.body.purchaseDate,
-      isPurchased: true
+      totalAmount: total,
+      purchaseDate: new Date(),
+      isPurchased: true,
+      userId: +req.user.id
     })
+    req.body.totalAmount.lines.forEach(async ln => {
+      const {subTotal, quantity, speciesId, priceId} = ln
+      const line = await order.createOrderLine({
+        quantity,
+        subTotal,
+        speciesId,
+        priceId,
+        orderId: order.id
+      })
+    })
+    order.save()
     res.json(order.id)
   } catch (err) {
     next(err)

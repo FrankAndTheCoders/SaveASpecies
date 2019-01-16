@@ -40,7 +40,7 @@ async function seed() {
     quarterAgoPrices.map(price => Price.create(price))
   )
   const dbOrders = await Promise.all(orders.map(order => Order.create(order)))
-
+  // console.log(Object.keys(Object.getPrototypeOf(dbOrders[0])))
   //  Set prices on species (current, future, historical)
   for (let i = 0; i < dbCurrentPrices.length; i++) {
     await dbCurrentPrices[i].setSpecies(dbSpecies[i])

@@ -7,7 +7,7 @@ router.get('/:id', async (req, res, next) => {
     const speciesId = Number(req.params.id)
     const [
       species
-    ] = await db.query(`select DISTINCT ON (p."speciesId") p."currentPrice", s."id", s."name", s."category", s."inventory", s."description", s."ImageUrl"
+    ] = await db.query(`select DISTINCT ON (p."speciesId") p."currentPrice", p."id" as PriceID, s."id", s."name", s."category", s."inventory", s."description", s."ImageUrl"
 from prices p left join species s ON p."speciesId" = s."id"
 where p."effectiveDate" < now() and p."speciesId" = ${speciesId};`)
 
@@ -21,7 +21,7 @@ router.get('/', async (req, res, next) => {
   try {
     const [
       allSpecies
-    ] = await db.query(`select DISTINCT ON (p."speciesId") p."currentPrice", s."id", s."name", s."category", s."inventory", s."description", s."ImageUrl"
+    ] = await db.query(`select DISTINCT ON (p."speciesId") p."currentPrice", p."id" as PriceID, s."id", s."name", s."category", s."inventory", s."description", s."ImageUrl"
 from prices p left join species s ON p."speciesId" = s."id"
 where p."effectiveDate" < now();`)
     res.json(allSpecies)

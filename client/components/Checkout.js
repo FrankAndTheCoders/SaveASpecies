@@ -70,7 +70,27 @@ class Checkout extends Component {
 
   handleClick() {
     if (this.state.totalAmount !== '') {
-      this.props.placeOrder(this.state.totalAmount, this.state.date)
+      const order = {}
+      order.purchaseDate = this.state.date
+      order.isPurchased = true
+      order.totalAmount = this.state.totalAmount
+      order.lines = this.props.orderLines.map(ln => {
+        const {
+          currentPrice,
+          id: speciesId,
+          priceid: priceId,
+          quantity,
+          name
+        } = ln
+        const line = {currentPrice, speciesId, priceId, name, quantity}
+        line.subTotal = ln.quantity * ln.currentPrice
+        return line
+      })
+
+      this.props.placeOrder(order)
+      while (this.props.orderLines.length) {
+        this.props.orderLines.pop()
+      }
       this.setState({
         totalAmount: '',
         date: new Date()
