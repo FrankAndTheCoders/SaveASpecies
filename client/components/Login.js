@@ -87,6 +87,10 @@ class Login extends Component {
                 Log In
               </Button>
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <Button color="primary" variant="contained" href="/auth/google">
+                Login With Google
+              </Button>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <Button
                 onClick={this.handleSubmitSignUp}
                 variant="contained"
