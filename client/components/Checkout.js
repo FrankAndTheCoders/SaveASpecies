@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {placeOrder} from '../store/cart'
+import PlaceOrderButton from './Thank-you'
 import {
   Typography,
   List,
@@ -135,13 +136,7 @@ class Checkout extends Component {
             >
               Back
             </Button>
-            <Button
-              variant="outlined"
-              className={classes.button}
-              onClick={this.handleClick}
-            >
-              Place Order
-            </Button>
+            <PlaceOrderButton handleClick={this.handleClick} />
           </div>
         </Paper>
       </main>

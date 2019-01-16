@@ -1,6 +1,5 @@
 const router = require('express').Router()
-const {OrderLine, Order} = require('../db/models')
-const db = require('../db')
+const {OrderLine, Order, Species} = require('../db/models')
 module.exports = router
 
 router.get('/', (req, res, next) => {
@@ -36,12 +35,17 @@ router.get('/order/:userId', async (req, res, next) => {
     try {
       const {userId} = req.params
 
-      // const orders = await Order.findAll({where: {userId}})
-      const [orderLines] = await db.query(
-        `SELECT * FROM "orders" o LEFT JOIN "orderLines" l ON o."id" = l."orderId" WHERE o."userId" = ${userId}`
-      )
-
-      res.json(orderLines)
+      const orders = await Order.findAll({
+        where: {userId},
+        include: [
+          {
+            model: OrderLine,
+            attributes: ['id', 'quantity', 'subTotal', 'speciesId', 'orderId'],
+            include: [{model: Species, attributes: ['name']}]
+          }
+        ]
+      })
+      res.json(orders)
     } catch (err) {
       next(err)
     }

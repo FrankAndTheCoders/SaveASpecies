@@ -16,6 +16,7 @@ Order.hasMany(OrderLine)
 Species.hasMany(OrderLine)
 Price.hasMany(OrderLine)
 OrderLine.belongsTo(Order)
+OrderLine.belongsTo(Species)
 
 //  Order Table
 Order.belongsTo(User)

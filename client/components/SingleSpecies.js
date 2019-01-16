@@ -29,8 +29,8 @@ const styles = theme => ({
     paddingTop: theme.spacing.unit * 10
   },
   needPadding: {
-    paddingLeft: theme.spacing.unit * 50,
-    paddingRight: theme.spacing.unit * 50
+    paddingLeft: theme.spacing.unit * 30,
+    paddingRight: theme.spacing.unit * 30
   },
   text: {
     fontSize: 17
@@ -92,9 +92,11 @@ class SingleSpecies extends Component {
               <Typography gutterBottom variant="h5" component="h2">
                 {indSpecies.name}
               </Typography>
-              <Typography gutterBottom variant="h5" component="h2">{`$${
-                indSpecies.currentPrice
-              }`}</Typography>
+              <Typography
+                gutterBottom
+                variant="h5"
+                component="h2"
+              >{`$${indSpecies.currentPrice / 100}`}</Typography>
               <Typography className={classes.text} component="p">
                 {indSpecies.description}
               </Typography>
