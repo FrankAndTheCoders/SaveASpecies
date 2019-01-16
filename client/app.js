@@ -222,7 +222,11 @@ class App extends React.Component {
               {this.props.user.id ? (
                 <Grid item>
                   <NavLink to="/user">
-                    <Button color="inherit">{this.props.user.firstName}</Button>
+                    <Button color="inherit">
+                      {this.props.user.firstName.length !== 0
+                        ? this.props.user.firstName
+                        : this.props.user.email.split('@')[0]}
+                    </Button>
                   </NavLink>
 
                   <NavLink to="/login">
