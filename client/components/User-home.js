@@ -18,10 +18,18 @@ class UserHome extends Component {
         <div>Order History:</div>
         <div>
           {orderHistory.map(order => (
-            <p key={order.id}>
-              Total Amount: {order.totalAmount} Purchase Date:
-              {order.purchaseDate}
-            </p>
+            <div>
+              <p>Order #: {order.id}</p>
+              {order.orderLines.map(orderLine => (
+                <div>
+                  <p>{orderLine.species.name}</p>
+                  <p>Quantity: {orderLine.quantity}</p>
+                  <p>SubTotal:{`$${orderLine.subTotal / 100}`}</p>
+                </div>
+              ))}
+              <p> Total Amount: {order.totalAmount} </p>
+              <p>Purchase Date: {order.purchaseDate.split('T')[0]}</p>
+            </div>
           ))}
         </div>
       </div>
