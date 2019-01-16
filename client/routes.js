@@ -30,8 +30,14 @@ class Routes extends Component {
         {isLoggedIn && (
           <Switch>
             <Route exact path="/user" component={UserHome} />
-            {/* Routes placed here are only available after logging in */}
-            {/* <Route path="/home" component={UserHome} /> */}
+            <Route exact path="/" component={AllSpecies} />
+            <Route exact path="/checkout" component={Checkout} />
+            <Route exact path="/:animalGroup" component={SingleCategory} />
+            <Route
+              exact
+              path="/:animalGroup/:speciesName"
+              component={SingleSpecies}
+            />
           </Switch>
         )}
         {/* Routes placed here are available to all visitors */}
