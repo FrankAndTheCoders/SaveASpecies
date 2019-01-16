@@ -64,6 +64,7 @@ class CartItem extends React.Component {
 
       return {count: prevState.count - 1}
     })
+    this.updateLocalStorage(this.props.animal, this.props.animal.quantity)
   }
 
   componentDidUpdate() {}
