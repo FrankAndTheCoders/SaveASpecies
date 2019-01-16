@@ -161,7 +161,7 @@ class App extends React.Component {
               spacing={0}
             >
               <Grid item>
-                <NavLink to="/">
+                <NavLink to="/species">
                   <IconButton color="inherit">
                     <Home />
                   </IconButton>

@@ -33,3 +33,10 @@ form div {
   flex-direction: row;
   justify-content: space-between;
 }
+
+.homepageImage {
+  height: 40vw;
+  width: 65vw;
+  border-radius: 25px;
+  margin-right: 2em;
+}

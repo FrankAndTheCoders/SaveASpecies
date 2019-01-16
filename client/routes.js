@@ -9,7 +9,8 @@ import {
   Login,
   SignUp,
   Checkout,
-  UserHome
+  UserHome,
+  HomePage
 } from './components'
 import {me} from './store'
 import {format} from 'url'
@@ -30,7 +31,8 @@ class Routes extends Component {
         {isLoggedIn && (
           <Switch>
             <Route exact path="/user" component={UserHome} />
-            <Route exact path="/" component={AllSpecies} />
+            <Route exact path="/" component={HomePage} />
+            <Route exact path="/species" component={AllSpecies} />
             <Route exact path="/checkout" component={Checkout} />
             <Route exact path="/:animalGroup" component={SingleCategory} />
             <Route
@@ -41,7 +43,8 @@ class Routes extends Component {
           </Switch>
         )}
         {/* Routes placed here are available to all visitors */}
-        <Route exact path="/" component={AllSpecies} />
+        <Route exact path="/" component={HomePage} />
+        <Route exact path="/species" component={AllSpecies} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={SignUp} />
         <Route exact path="/checkout" component={Checkout} />
