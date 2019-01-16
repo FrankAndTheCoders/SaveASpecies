@@ -11,51 +11,51 @@ const {
 
 const currentPrices = [
   {
-    currentPrice: 100,
+    currentPrice: 100000,
     effectiveDate: today
   },
   {
-    currentPrice: 100,
+    currentPrice: 200000,
     effectiveDate: yesterday
   },
   {
-    currentPrice: 100,
+    currentPrice: 550000,
     effectiveDate: weekAgo
   },
   {
-    currentPrice: 100,
+    currentPrice: 1100000,
     effectiveDate: yesterday
   },
   {
-    currentPrice: 100,
+    currentPrice: 1750000,
     effectiveDate: weekAgo
   },
   {
-    currentPrice: 100,
+    currentPrice: 2200000,
     effectiveDate: weekAgo
   },
   {
-    currentPrice: 100,
+    currentPrice: 800000,
     effectiveDate: yesterday
   },
   {
-    currentPrice: 100,
+    currentPrice: 630000,
     effectiveDate: yesterday
   },
   {
-    currentPrice: 100,
+    currentPrice: 11250000,
     effectiveDate: yesterday
   },
   {
-    currentPrice: 100,
+    currentPrice: 410000,
     effectiveDate: today
   },
   {
-    currentPrice: 100,
+    currentPrice: 600000,
     effectiveDate: today
   },
   {
-    currentPrice: 100,
+    currentPrice: 80000,
     effectiveDate: today
   }
 ]
