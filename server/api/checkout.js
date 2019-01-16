@@ -12,10 +12,12 @@ router.post('/', async (req, res, next) => {
       userId: +req.user.id
     })
     req.body.totalAmount.lines.forEach(async ln => {
-      const {subTotal, quantity} = ln
+      const {subTotal, quantity, speciesId, priceId} = ln
       const line = await order.createOrderLine({
         quantity,
         subTotal,
+        speciesId,
+        priceId,
         orderId: order.id
       })
     })

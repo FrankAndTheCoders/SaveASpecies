@@ -75,11 +75,19 @@ class Checkout extends Component {
       order.isPurchased = true
       order.totalAmount = this.state.totalAmount
       order.lines = this.props.orderLines.map(ln => {
-        const {currentPrice, id, quantity, name} = ln
-        const line = {currentPrice, id, name, quantity}
+        console.log(ln)
+        const {
+          currentPrice,
+          id: speciesId,
+          priceid: priceId,
+          quantity,
+          name
+        } = ln
+        const line = {currentPrice, speciesId, priceId, name, quantity}
         line.subTotal = ln.quantity * ln.currentPrice
         return line
       })
+      console.log(order.lines)
 
       this.props.placeOrder(order)
       while (this.props.orderLines.length) {
